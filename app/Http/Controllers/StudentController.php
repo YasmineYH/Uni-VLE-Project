@@ -18,7 +18,7 @@ class StudentController extends Controller {
         return view('student.login');
     }
 
-    function getStudentInfo() {
+    public function getStudentInfo() {
         if (session()->has('LoggedStudent')) {
             $data = Student::where('Student_ID', '=', session('LoggedStudent'))->first();
         }
