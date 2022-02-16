@@ -2,7 +2,7 @@
 
 @section('page-content')
     <section class="home home-index">
-        <img src="{{ asset('images/logo.png') }}" alt="Go">
+        <img src="/images/logo.png" alt="Go">
         <h1>University of Ilorin Virtual Learning Environment</h1>
 
         <div class="home-btns">
@@ -10,5 +10,5 @@
             <a href="{{ Route('lecturer_login') }}" class="normal-btn">I'm a Lecturer</a>
         </div>
     </section>
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="/js/app.js"></script>
 @endsection
