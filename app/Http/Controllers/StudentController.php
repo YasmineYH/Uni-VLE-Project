@@ -29,7 +29,7 @@ class StudentController extends Controller {
 
 
     public function library_cm() {
-        $studentData = getStudentInfo();
+        $studentData = $this->getStudentInfo();
 
         $enrollments = array();
         $enrollmentsID = DB::select('select * from enrollments where Student_ID = ?', [$studentData->Student_ID]);
@@ -47,7 +47,7 @@ class StudentController extends Controller {
     }
 
     public function library_rc() {
-        $studentData = getStudentInfo();
+        $studentData = $this->getStudentInfo();
 
 
         return view('student.library_classes')->with('studentData', $studentData);
@@ -56,7 +56,7 @@ class StudentController extends Controller {
 
 
     public function class() {
-        $studentData = getStudentInfo();
+        $studentData = $this->getStudentInfo();
 
 
         $students = DB::select('select * from students');
@@ -68,7 +68,7 @@ class StudentController extends Controller {
 
 
     public function assignments_ps() {
-        $studentData = getStudentInfo();
+        $studentData = $this->getStudentInfo();
 
 
         $courses = DB::select('select * from enrollments where Student_ID = ?', [$studentData['Student_ID']]);
@@ -83,7 +83,7 @@ class StudentController extends Controller {
     }
 
     public function theory_submit($courseCode, $assignID) {
-        $studentData = getStudentInfo();
+        $studentData = $this->getStudentInfo();
 
 
         $assignment = DB::select('select * from assignments where id = ?', [$assignID]);
@@ -93,7 +93,7 @@ class StudentController extends Controller {
     }
 
     public function essay_submit($courseCode, $assignID) {
-        $studentData = getStudentInfo();
+        $studentData = $this->getStudentInfo();
 
 
         $assignment = DB::select('select * from assignments where id = ?', [$assignID]);
@@ -103,7 +103,7 @@ class StudentController extends Controller {
     }
 
     public function obj_submit($courseCode, $assignID) {
-        $studentData = getStudentInfo();
+        $studentData = $this->getStudentInfo();
 
 
         $assignment = DB::select('select * from assignments where id = ?', [$assignID]);
@@ -113,7 +113,7 @@ class StudentController extends Controller {
     }
 
     public function assignments_rs() {
-        $studentData = getStudentInfo();
+        $studentData = $this->getStudentInfo();
 
 
         $courses = DB::select('select * from enrollments where Student_ID = ?', [$studentData['Student_ID']]);
@@ -128,7 +128,7 @@ class StudentController extends Controller {
     }
 
     public function theory_view($courseCode, $assignID) {
-        $studentData = getStudentInfo();
+        $studentData = $this->getStudentInfo();
 
 
         $assignment = DB::select('select * from assignments where id = ?', [$assignID]);
@@ -139,7 +139,7 @@ class StudentController extends Controller {
     }
 
     public function essay_view($courseCode, $assignID) {
-        $studentData = getStudentInfo();
+        $studentData = $this->getStudentInfo();
 
 
         $assignment = DB::select('select * from assignments where id = ?', [$assignID]);
@@ -150,7 +150,7 @@ class StudentController extends Controller {
     }
 
     public function obj_view($courseCode, $assignID) {
-        $studentData = getStudentInfo();
+        $studentData = $this->getStudentInfo();
 
 
         $assignment = DB::select('select * from assignments where id = ?', [$assignID]);
@@ -163,7 +163,7 @@ class StudentController extends Controller {
 
 
     public function notifications() {
-        $studentData = getStudentInfo();
+        $studentData = $this->getStudentInfo();
 
 
         return view('student.notifications')->with('studentData', $studentData);
@@ -223,7 +223,7 @@ class StudentController extends Controller {
     }
 
     function save_theory(Request $request, $courseCode, $assignID) {
-        $studentData = getStudentInfo();
+        $studentData = $this->getStudentInfo();
 
 
         $data = $request->all();
@@ -266,7 +266,7 @@ class StudentController extends Controller {
     }
 
     function save_essay(Request $request, $courseCode, $assignID) {
-        $studentData = getStudentInfo();
+        $studentData = $this->getStudentInfo();
 
 
         //dd($request);
@@ -320,7 +320,7 @@ class StudentController extends Controller {
     }
 
     function save_obj(Request $request, $courseCode, $assignID, $studentData, $questions) {
-        $studentData = getStudentInfo();
+        $studentData = $this->getStudentInfo();
 
 
         $num_of_questions = (int)$questions;
@@ -373,7 +373,7 @@ class StudentController extends Controller {
     }
 
     function chat(Request $request) {
-        $studentData = getStudentInfo();
+        $studentData = $this->getStudentInfo();
 
 
         $data = $request->all();
