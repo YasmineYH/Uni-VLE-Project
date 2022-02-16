@@ -18,12 +18,18 @@ class StudentController extends Controller {
         return view('student.login');
     }
 
+    function getStudentInfo() {
+        if (session()->has('LoggedStudent')) {
+            $data = Student::where('Student_ID', '=', session('LoggedStudent'))->first();
+        }
+
+        return $data;
+    }
+
 
 
     public function library_cm() {
-        if (session()->has('LoggedStudent')) {
-            $studentData = Student::where('id', '=', session('LoggedStudent'))->first();
-        }
+        $studentData = getStudentInfo();
 
         $enrollments = array();
         $enrollmentsID = DB::select('select * from enrollments where Student_ID = ?', [$studentData->Student_ID]);
@@ -41,9 +47,8 @@ class StudentController extends Controller {
     }
 
     public function library_rc() {
-        if (session()->has('LoggedStudent')) {
-            $studentData = Student::where('id', '=', session('LoggedStudent'))->first();
-        }
+        $studentData = getStudentInfo();
+
 
         return view('student.library_classes')->with('studentData', $studentData);
     }
@@ -51,9 +56,8 @@ class StudentController extends Controller {
 
 
     public function class() {
-        if (session()->has('LoggedStudent')) {
-            $studentData = Student::where('id', '=', session('LoggedStudent'))->first();
-        }
+        $studentData = getStudentInfo();
+
 
         $students = DB::select('select * from students');
         $chats = DB::select('select * from chats');
@@ -64,9 +68,8 @@ class StudentController extends Controller {
 
 
     public function assignments_ps() {
-        if (session()->has('LoggedStudent')) {
-            $studentData = Student::where('id', '=', session('LoggedStudent'))->first();
-        }
+        $studentData = getStudentInfo();
+
 
         $courses = DB::select('select * from enrollments where Student_ID = ?', [$studentData['Student_ID']]);
         $assignments = array();
@@ -80,9 +83,8 @@ class StudentController extends Controller {
     }
 
     public function theory_submit($courseCode, $assignID) {
-        if (session()->has('LoggedStudent')) {
-            $studentData = Student::where('id', '=', session('LoggedStudent'))->first();
-        }
+        $studentData = getStudentInfo();
+
 
         $assignment = DB::select('select * from assignments where id = ?', [$assignID]);
         $questions = DB::select('select * from assignment__questions where Assignment_ID = ?', [$assignID]);
@@ -91,9 +93,8 @@ class StudentController extends Controller {
     }
 
     public function essay_submit($courseCode, $assignID) {
-        if (session()->has('LoggedStudent')) {
-            $studentData = Student::where('id', '=', session('LoggedStudent'))->first();
-        }
+        $studentData = getStudentInfo();
+
 
         $assignment = DB::select('select * from assignments where id = ?', [$assignID]);
         $questions = DB::select('select * from assignment__questions where Assignment_ID = ?', [$assignID]);
@@ -102,9 +103,8 @@ class StudentController extends Controller {
     }
 
     public function obj_submit($courseCode, $assignID) {
-        if (session()->has('LoggedStudent')) {
-            $studentData = Student::where('id', '=', session('LoggedStudent'))->first();
-        }
+        $studentData = getStudentInfo();
+
 
         $assignment = DB::select('select * from assignments where id = ?', [$assignID]);
         $questions = DB::select('select * from assignment__questions where Assignment_ID = ?', [$assignID]);
@@ -113,9 +113,8 @@ class StudentController extends Controller {
     }
 
     public function assignments_rs() {
-        if (session()->has('LoggedStudent')) {
-            $studentData = Student::where('id', '=', session('LoggedStudent'))->first();
-        }
+        $studentData = getStudentInfo();
+
 
         $courses = DB::select('select * from enrollments where Student_ID = ?', [$studentData['Student_ID']]);
         $assignments = array();
@@ -129,9 +128,8 @@ class StudentController extends Controller {
     }
 
     public function theory_view($courseCode, $assignID) {
-        if (session()->has('LoggedStudent')) {
-            $studentData = Student::where('id', '=', session('LoggedStudent'))->first();
-        }
+        $studentData = getStudentInfo();
+
 
         $assignment = DB::select('select * from assignments where id = ?', [$assignID]);
         $submission = DB::select('select * from assignment__submissions where Assignment_ID = ?', [$assignID]);
@@ -141,9 +139,8 @@ class StudentController extends Controller {
     }
 
     public function essay_view($courseCode, $assignID) {
-        if (session()->has('LoggedStudent')) {
-            $studentData = Student::where('id', '=', session('LoggedStudent'))->first();
-        }
+        $studentData = getStudentInfo();
+
 
         $assignment = DB::select('select * from assignments where id = ?', [$assignID]);
         $submission = DB::select('select * from assignment__submissions where Assignment_ID = ?', [$assignID]);
@@ -153,9 +150,8 @@ class StudentController extends Controller {
     }
 
     public function obj_view($courseCode, $assignID) {
-        if (session()->has('LoggedStudent')) {
-            $studentData = Student::where('id', '=', session('LoggedStudent'))->first();
-        }
+        $studentData = getStudentInfo();
+
 
         $assignment = DB::select('select * from assignments where id = ?', [$assignID]);
         $submission = DB::select('select * from assignment__submissions where Assignment_ID = ?', [$assignID]);
@@ -167,9 +163,8 @@ class StudentController extends Controller {
 
 
     public function notifications() {
-        if (session()->has('LoggedStudent')) {
-            $studentData = Student::where('id', '=', session('LoggedStudent'))->first();
-        }
+        $studentData = getStudentInfo();
+
 
         return view('student.notifications')->with('studentData', $studentData);
     }
@@ -228,9 +223,8 @@ class StudentController extends Controller {
     }
 
     function save_theory(Request $request, $courseCode, $assignID) {
-        if (session()->has('LoggedStudent')) {
-            $studentData = Student::where('id', '=', session('LoggedStudent'))->first();
-        }
+        $studentData = getStudentInfo();
+
 
         $data = $request->all();
         $answers = $request->get('answer');
@@ -272,9 +266,8 @@ class StudentController extends Controller {
     }
 
     function save_essay(Request $request, $courseCode, $assignID) {
-        if (session()->has('LoggedStudent')) {
-            $studentData = Student::where('id', '=', session('LoggedStudent'))->first();
-        }
+        $studentData = getStudentInfo();
+
 
         //dd($request);
         $date = date("Y-m-d");
@@ -327,9 +320,8 @@ class StudentController extends Controller {
     }
 
     function save_obj(Request $request, $courseCode, $assignID, $studentData, $questions) {
-        if (session()->has('LoggedStudent')) {
-            $studentData = Student::where('id', '=', session('LoggedStudent'))->first();
-        }
+        $studentData = getStudentInfo();
+
 
         $num_of_questions = (int)$questions;
         $data = $request->all();
@@ -381,9 +373,8 @@ class StudentController extends Controller {
     }
 
     function chat(Request $request) {
-        if (session()->has('LoggedStudent')) {
-            $studentData = Student::where('id', '=', session('LoggedStudent'))->first();
-        }
+        $studentData = getStudentInfo();
+
 
         $data = $request->all();
         $date = date("Y-m-d");
