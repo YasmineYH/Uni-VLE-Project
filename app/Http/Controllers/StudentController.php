@@ -187,7 +187,7 @@ class StudentController extends Controller {
         $student = Student::where('Student_ID', '=', $request->Student_ID)->first();
         if ($student) {
             if (Hash::check($request->Password, $student->Password)) {
-                $request->session()->put('LoggedStudent', $student->id);
+                $request->session()->put('LoggedStudent', $student->Student_ID);
                 return redirect('student_profile');
             } else {
                 return back()->with('fail', 'Invalid password');
@@ -199,7 +199,7 @@ class StudentController extends Controller {
 
     function student_profile() {
         if (session()->has('LoggedStudent')) {
-            $student = Student::where('id', '=', session('LoggedStudent'))->first();
+            $student = Student::where('Student_ID', '=', session('LoggedStudent'))->first();
             $data = [
                 'studentData' => $student
             ];
