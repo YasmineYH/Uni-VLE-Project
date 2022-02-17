@@ -382,7 +382,7 @@ class StudentController extends Controller {
         if (!empty($data['message'])) {
             $chat = Chat::create([
                 "Message" => $data['message'],
-                "Sender" => $studentData->Student_ID,
+                "Sender" => $studentData->StudentID,
                 "Date" => $date,
                 "Time" => $time
             ]);
