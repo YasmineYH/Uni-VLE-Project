@@ -2,7 +2,7 @@
 @php ($page = 'start_class')
 
 @section('page-content')
-    <h1 class="h1-cener">Which class would you like to start? {{ sizeof($lecturerCourses) }}</h1>
+    <h1 class="h1-cener">Which class would you like to start? {{ sizeof($lecturerCourses) }} {{ $lecturerData->LecturerID }} </h1>
 
     <ul class="lecturer-class-cards">
         @foreach ($lecturerCourses as $lecturerCourse)
