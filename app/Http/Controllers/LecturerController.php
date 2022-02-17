@@ -23,7 +23,7 @@ class LecturerController extends Controller {
     public function start_class() {
         if (session()->has('LoggedLecturer')) {
             $lecturerData = Lecturer::where('id', '=', session('LoggedLecturer'))->first();
-            $lecturerCourses = DB::select('select * from courses where LecturerID = ?', [$lecturerData->LecturerID]);
+            $lecturerCourses = DB::select("select * from courses where 'Lecturer ID' = ?", [$lecturerData->LecturerID]);
         }
 
         return view('lecturer.start_class')->with('lecturerData', $lecturerData)->with('lecturerCourses', $lecturerCourses);
@@ -32,7 +32,7 @@ class LecturerController extends Controller {
     public function courses() {
         if (session()->has('LoggedLecturer')) {
             $lecturerData = Lecturer::where('id', '=', session('LoggedLecturer'))->first();
-            $lecturerCourses = DB::select('select * from courses where LecturerID = ?', [$lecturerData->LecturerID]);
+            $lecturerCourses = DB::select("select * from courses where 'Lecturer ID' = ?", [$lecturerData->LecturerID]);
         }
 
         return view('lecturer.courses')->with('lecturerData', $lecturerData)->with('lecturerCourses', $lecturerCourses);
@@ -41,15 +41,15 @@ class LecturerController extends Controller {
     public function courses_students($courseCode) {
         if (session()->has('LoggedLecturer')) {
             $lecturerData = Lecturer::where('id', '=', session('LoggedLecturer'))->first();
-            $lecturerCourses = DB::select('select * from courses where LecturerID = ?', [$lecturerData->LecturerID]);
+            $lecturerCourses = DB::select("select * from courses where 'Lecturer ID' = ?", [$lecturerData->LecturerID]);
         }
 
         $courseID = DB::table('courses')->where('CourseCode', '=', [$courseCode])->pluck('CourseID');
-        $courseEnrollments = DB::select('select * from enrollments where CourseID = ?', [$courseID->first()]);
+        $courseEnrollments = DB::select("select * from enrollments where 'Course ID' = ?", [$courseID->first()]);
         $courseStudents = array();
 
         foreach ($courseEnrollments as $property => $courseEnrollment) {
-            $courseStudent = DB::select('select * from students where StudentID = ?', [$courseEnrollment->StudentID]);
+            $courseStudent = DB::select("select * from students where 'Student ID' = ?", [$courseEnrollment->StudentID]);
             $courseStudents[] = $courseStudent;
         }
 
@@ -59,11 +59,11 @@ class LecturerController extends Controller {
     public function courses_library_cm($courseCode) {
         if (session()->has('LoggedLecturer')) {
             $lecturerData = Lecturer::where('id', '=', session('LoggedLecturer'))->first();
-            $lecturerCourses = DB::select('select * from courses where LecturerID = ?', [$lecturerData->LecturerID]);
+            $lecturerCourses = DB::select("select * from courses where 'Lecturer ID' = ?", [$lecturerData->LecturerID]);
         }
 
         $courseID = DB::table('courses')->where('CourseCode', '=', [$courseCode])->pluck('CourseID');
-        $courseMaterials = DB::select('select * from course__materials where CourseID = ?', [$courseID->first()]);
+        $courseMaterials = DB::select("select * from course__materials where 'Course ID' = ?", [$courseID->first()]);
 
         return view('lecturer.library_materials')->with('lecturerData', $lecturerData)->with('lecturerCourses', $lecturerCourses)->with('courseMaterials', $courseMaterials)->with('courseCode', $courseCode)->with('returningMaterial', false);
     }
@@ -71,11 +71,11 @@ class LecturerController extends Controller {
     public function courses_library_rc($courseCode) {
         if (session()->has('LoggedLecturer')) {
             $lecturerData = Lecturer::where('id', '=', session('LoggedLecturer'))->first();
-            $lecturerCourses = DB::select('select * from courses where LecturerID = ?', [$lecturerData->LecturerID]);
+            $lecturerCourses = DB::select("select * from courses where 'Lecturer ID' = ?", [$lecturerData->LecturerID]);
         }
 
         $courseID = DB::table('courses')->where('CourseCode', '=', [$courseCode])->pluck('CourseID');
-        $courseMaterials = DB::select('select * from course__materials where CourseID = ?', [$courseID->first()]);
+        $courseMaterials = DB::select("select * from course__materials where 'Course ID' = ?", [$courseID->first()]);
 
         return view('lecturer.library_classes')->with('lecturerData', $lecturerData)->with('lecturerCourses', $lecturerCourses)->with('courseMaterials', $courseMaterials)->with('courseCode', $courseCode);
     }
@@ -147,7 +147,7 @@ class LecturerController extends Controller {
             $fileName = $file->getClientOriginalName();
             $filePath = $file->storeAs('uploads', $fileName, 'public');
 
-            $fileExists = DB::select('select * from course__materials where MaterialID = ?', [$fileName]);
+            $fileExists = DB::select("select * from course__materials where 'Material ID' = ?", [$fileName]);
 
             if (empty($fileExists)) {
                 if ($extension == 'pdf') {

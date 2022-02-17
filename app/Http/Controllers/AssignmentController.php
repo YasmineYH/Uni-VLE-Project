@@ -22,7 +22,7 @@ class AssignmentController extends Controller {
         }
 
         $courseID = DB::table('courses')->where('CourseCode', '=', [$courseCode])->pluck('CourseID');
-        $assignDrafts = DB::select('select * from assignments where CourseID = ? and Draft = ?', [$courseID->first(), 'yes']);
+        $assignDrafts = DB::select("select * from assignments where 'Course ID' = ? and Draft = ?", [$courseID->first(), 'yes']);
 
         return view('lecturer.assignments_drafts')->with('lecturerData', $lecturerData)->with('assignDrafts', $assignDrafts)->with('courseCode', $courseCode);
     }
@@ -35,7 +35,7 @@ class AssignmentController extends Controller {
         }
 
         $courseID = DB::table('courses')->where('CourseCode', '=', [$courseCode])->pluck('CourseID');
-        $assignments = DB::select('select * from assignments where CourseID = ? and Draft = ?', [$courseID->first(), 'no']);
+        $assignments = DB::select("select * from assignments where 'Course ID' = ? and Draft = ?", [$courseID->first(), 'no']);
 
         return view('lecturer.assignments')->with('lecturerData', $lecturerData)->with('assignments', $assignments)->with('courseCode', $courseCode);
     }
@@ -98,7 +98,7 @@ class AssignmentController extends Controller {
             $lecturerData = Lecturer::where('id', '=', session('LoggedLecturer'))->first();
         }
 
-        $submissions = DB::select('select * from assignment__submissions where AssignmentID = ?', [$assignID]);
+        $submissions = DB::select("select * from assignment__submissions where 'Assignment ID' = ?", [$assignID]);
         $assignment = DB::select('select * from assignments where id = ?', [$assignID]);
 
         return view('lecturer.submissions')->with('lecturerData', $lecturerData)->with('courseCode', $courseCode)->with('assignID', $assignID)->with('assignment', $assignment)->with('submissions', $submissions);
@@ -109,9 +109,9 @@ class AssignmentController extends Controller {
             $lecturerData = Lecturer::where('id', '=', session('LoggedLecturer'))->first();
         }
 
-        $submissions = DB::select('select * from assignment__submissions where AssignmentID = ?', [$assignID]);
+        $submissions = DB::select("select * from assignment__submissions where 'Assignment ID' = ?", [$assignID]);
         $assignment = DB::select('select * from assignments where id = ?', [$assignID]);
-        $questions = DB::select('select * from question__answers where SubmissionID = ?', [$submissions[0]->id]);
+        $questions = DB::select("select * from question__answers where 'Submission ID' = ?", [$submissions[0]->id]);
 
         return view('lecturer.grade_assignment')->with('lecturerData', $lecturerData)->with('courseCode', $courseCode)->with('assignID', $assignID)->with('assignment', $assignment)->with('submissions', $submissions)->with('questions', $questions);
     }
@@ -193,7 +193,7 @@ class AssignmentController extends Controller {
     
             case 'done':
                 $courseID = DB::table('courses')->where('CourseCode', '=', [$courseCode])->pluck('CourseID');
-                $assignDrafts = DB::select('select * from assignments where CourseID = ? and Draft = ?', [$courseID->first(), 'yes']);
+                $assignDrafts = DB::select("select * from assignments where 'Course ID' = ? and Draft = ?", [$courseID->first(), 'yes']);
 
                 $data = $request->all();
 
@@ -222,7 +222,7 @@ class AssignmentController extends Controller {
         }
 
         $courseID = DB::table('courses')->where('CourseCode', '=', [$courseCode])->pluck('CourseID');
-        $assignDrafts = DB::select('select * from assignments where CourseID = ? and Draft = ?', [$courseID->first(), 'yes']);
+        $assignDrafts = DB::select("select * from assignments where 'Course ID' = ? and Draft = ?", [$courseID->first(), 'yes']);
 
         $data = $request->all();
 
@@ -281,7 +281,7 @@ class AssignmentController extends Controller {
     
             case 'done':
                 $courseID = DB::table('courses')->where('CourseCode', '=', [$courseCode])->pluck('CourseID');
-                $assignDrafts = DB::select('select * from assignments where CourseID = ? and Draft = ?', [$courseID->first(), 'yes']);
+                $assignDrafts = DB::select("select * from assignments where 'Course ID' = ? and Draft = ?", [$courseID->first(), 'yes']);
 
                 $data = $request->all();
 
