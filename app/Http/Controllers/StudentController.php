@@ -231,7 +231,7 @@ class StudentController extends Controller {
         $date = date("Y-m-d");
       
         if (!(in_array(null, $answers))) {
-            $submitted = DB::select("select * from assignment__submissions where 'Assignment ID' = ? and StudentID = ?", [$assignID, $studentData->StudentID]);
+            $submitted = DB::select("select * from assignment__submissions where 'Assignment ID' = ? and 'Student ID' = ?", [$assignID, $studentData->StudentID]);
 
             if (empty($submitted)) {
                 $submission = Assignment_Submission::create([
@@ -284,7 +284,7 @@ class StudentController extends Controller {
             if ($extension == 'pdf') {
                 $file->storeAs('uploads', $fileName, 'public');
 
-                $submitted = DB::select("select * from assignment__submissions where 'Assignment ID' = ? and StudentID = ?", [$assignID, $studentData->StudentID]);
+                $submitted = DB::select("select * from assignment__submissions where 'Assignment ID' = ? and 'Student ID' = ?", [$assignID, $studentData->StudentID]);
 
                 if (empty($submitted)) {
                     $submission = Assignment_Submission::create([
@@ -351,7 +351,7 @@ class StudentController extends Controller {
 
         $refined_grade = ($assign_total->first() * $grade) / count($answers);
       
-        $submitted = DB::select("select * from assignment__submissions where 'Assignment ID' = ? and StudentID = ?", [$assignID, $studentData->StudentID]);
+        $submitted = DB::select("select * from assignment__submissions where 'Assignment ID' = ? and 'Student ID' = ?", [$assignID, $studentData->StudentID]);
 
         if (empty($submitted)) {
             $submission = Assignment_Submission::create([

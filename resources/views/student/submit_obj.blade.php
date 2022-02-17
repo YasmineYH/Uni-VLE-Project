@@ -42,7 +42,7 @@
 
     <form action="{{ Route('save_obj', ['studentData' => $studentData, 'courseCode' => $courseCode, 'assignID' => $assignment[0]->id, 'questions' => count($questions)]) }}" method="post" enctype="multipart/form-data" class="frame frame-objective">
         @csrf
-        @foreach ($questions as $key => $question)
+        @foreach ($shuffled_questions as $key => $question)
             <div class="question-box">
                 <label for="">Question {{ $key+1 }}: <span>{{ $question->QuestionTitle }}</span></label>
                 <span class="input-error">@error('answer{{ $key+1 }}') {{ $message }} @enderror</span class="input-error">
