@@ -32,7 +32,7 @@ class StudentController extends Controller {
         $studentData = $this->getStudentInfo();
 
         $enrollments = array();
-        $enrollmentsID = DB::select('select * from enrollments where StudentID = ?', [$studentData->StudentID]);
+        $enrollmentsID = DB::select("select * from enrollments where 'Student ID' = ?", [$studentData->StudentID]);
 
         foreach ($enrollmentsID as $enrollmentID) {
             $id = $enrollmentID->CourseID;
