@@ -23,7 +23,7 @@
             @csrf
             <span class="input-error">@error('StudentID') {{ $message }} @enderror</span>
             <label for="Student_ID"><h3>Matric No:</h3></label>
-            <input type="text" name="Student_ID" id="Student_ID" value="{{ old('StudentID') }}">
+            <input type="text" name="Student_ID" id="Student_ID" value="{{ old('Student_ID') }}">
 
             <span class="input-error">@error('Password') {{ $message }} @enderror</span>
             <label for="Password"><h3>Password:</h3></label>
