@@ -13,7 +13,7 @@ class CreateAssignmentSubmissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('assignmentsubmissions', function (Blueprint $table) {
+        Schema::create('assignment__submissions', function (Blueprint $table) {
             $table->id();
             $table->string('AssignmentID');
             $table->string('StudentID');

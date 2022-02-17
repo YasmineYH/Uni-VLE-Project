@@ -13,7 +13,7 @@ class CreateAssignmentQuestionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('assignment_questions', function (Blueprint $table) {
+        Schema::create('assignment__questions', function (Blueprint $table) {
             $table->id();
             $table->string('QuestionID');
             $table->string('AssignmentID');

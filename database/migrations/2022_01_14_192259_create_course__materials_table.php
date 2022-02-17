@@ -13,7 +13,7 @@ class CreateCourseMaterialsTable extends Migration
      */
     public function up()
     {
-        Schema::create('course_materials', function (Blueprint $table) {
+        Schema::create('course__materials', function (Blueprint $table) {
             $table->id();
             $table->string('MaterialID');
             $table->string('CourseID');

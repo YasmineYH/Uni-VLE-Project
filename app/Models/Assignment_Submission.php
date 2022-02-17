@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Assignment_Submission extends Model
 {
     use HasFactory;
+    protected $table = 'assignment__submissions';
 
     protected $fillable = [
         'AssignmentID',
