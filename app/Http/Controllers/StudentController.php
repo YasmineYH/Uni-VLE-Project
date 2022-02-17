@@ -116,7 +116,7 @@ class StudentController extends Controller {
         $studentData = $this->getStudentInfo();
 
 
-        $courses = DB::select('select * from enrollments where StudentID = ?', [$studentData['StudentID']]);
+        $courses = DB::select('select * from enrollments where enrollments.StudentID = ?', [$studentData['StudentID']]);
         $assignments = array();
 
         foreach ($courses as $property => $course) {
