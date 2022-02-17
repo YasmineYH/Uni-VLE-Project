@@ -22,17 +22,17 @@ use App\Models\Enrollment;
 Route::post('/student/create', function (Request $request) {
     $data = $request->all();
 
-    if (!Student::where('Student_ID', '=', $data['Student_ID'])->exists()) {
+    if (!Student::where('StudentID', '=', $data['StudentID'])->exists()) {
         $student = Student::create([
-            "Student_ID" => $data["Student_ID"],
-            "Student_Firstname" => $data["Student_Firstname"],
-            "Student_Middlename" => $data["Student_Middlename"],
-            "Student_Lastname" => $data["Student_Lastname"],
+            "StudentID" => $data["StudentID"],
+            "StudentFirstname" => $data["StudentFirstname"],
+            "StudentMiddlename" => $data["StudentMiddlename"],
+            "StudentLastname" => $data["StudentLastname"],
             "Level" => $data["Level"],
             "Phone" => $data["Phone"],
             "Email" => $data["Email"],
             "Profile" => $data["Profile"],
-            "Password" => Hash::make($data["Student_Lastname"])
+            "Password" => Hash::make($data["StudentLastname"])
         ]);
 
         if (empty($student->id)) {
@@ -64,17 +64,17 @@ Route::post('/student/create', function (Request $request) {
 Route::post('/lecturer/create', function (Request $request) {
     $data = $request->all();
 
-    if (!Lecturer::where('Lecturer_ID', '=', $data['Lecturer_ID'])->exists()) {
+    if (!Lecturer::where('LecturerID', '=', $data['LecturerID'])->exists()) {
         $lecturer = Lecturer::create([
-            "Lecturer_ID" => $data["Lecturer_ID"],
-            "Lecturer_Firstname" => $data["Lecturer_Firstname"],
-            "Lecturer_Middlename" => $data["Lecturer_Middlename"],
-            "Lecturer_Lastname" => $data["Lecturer_Lastname"],
+            "LecturerID" => $data["LecturerID"],
+            "LecturerFirstname" => $data["LecturerFirstname"],
+            "LecturerMiddlename" => $data["LecturerMiddlename"],
+            "LecturerLastname" => $data["LecturerLastname"],
             "Phone" => $data["Phone"],
             "Email" => $data["Email"],
             "Status" => $data["Status"],
             "Profile" => $data["Profile"],
-            "Password" => Hash::make($data["Lecturer_Lastname"])
+            "Password" => Hash::make($data["LecturerLastname"])
         ]);
 
         if (empty($lecturer->id)) {
@@ -106,12 +106,12 @@ Route::post('/lecturer/create', function (Request $request) {
 Route::post('/course/create', function (Request $request) {
     $data = $request->all();
 
-    if (!Course::where('Course_ID', '=', $data['Course_ID'])->exists()) {
+    if (!Course::where('CourseID', '=', $data['CourseID'])->exists()) {
         $course = Course::create([
-            "Course_ID" => $data["Course_ID"],
-            "Course_Code" => $data["Course_Code"],
-            "Course_Title" => $data["Course_Title"],
-            "Lecturer_ID" => $data["Lecturer_ID"]
+            "CourseID" => $data["CourseID"],
+            "CourseCode" => $data["CourseCode"],
+            "CourseTitle" => $data["CourseTitle"],
+            "LecturerID" => $data["LecturerID"]
         ]);
 
         if (empty($course->id)) {
@@ -143,8 +143,8 @@ Route::post('/enrollment/create', function (Request $request) {
     $data = $request->all();
 
     $enrollment = Enrollment::create([
-        "Course_ID" => $data["Course_ID"],
-        "Student_ID" => $data["Student_ID"]
+        "CourseID" => $data["CourseID"],
+        "StudentID" => $data["StudentID"]
     ]);
 
     if (empty($enrollment->id)) {
