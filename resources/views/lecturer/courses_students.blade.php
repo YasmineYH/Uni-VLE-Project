@@ -30,10 +30,10 @@
 
         @foreach ($courseStudents as $courseStudent)
             <div class="member table-row">
-                <div class="table-col name"><p>{{ $courseStudent[0]->Student_ID }}</p></div>
-                <div class="table-col name"><p>{{ $courseStudent[0]->Student_Firstname }}</p></div>
-                <div class="table-col name"><p>{{ $courseStudent[0]->Student_Middlename }}</p></div>
-                <div class="table-col name"><p>{{ $courseStudent[0]->Student_Lastname }}</p></div>
+                <div class="table-col name"><p>{{ $courseStudent[0]->StudentID }}</p></div>
+                <div class="table-col name"><p>{{ $courseStudent[0]->StudentFirstname }}</p></div>
+                <div class="table-col name"><p>{{ $courseStudent[0]->StudentMiddlename }}</p></div>
+                <div class="table-col name"><p>{{ $courseStudent[0]->StudentLastname }}</p></div>
                 <div class="table-col name hide-on-phone"><p>25%</p></div>
                 <div class="table-col name hide-on-phone"><p>0/40</p></div>
                 <div class="table-col name hide-on-phone"><p>3/60</p></div>

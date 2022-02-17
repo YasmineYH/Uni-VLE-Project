@@ -3,7 +3,7 @@
 
 @section('page-content')
     <div class="home-intro" style="width: 80%">
-        <h1>Good Morning, {{ $lecturerData->Status . " " . $lecturerData->Lecturer_Lastname }}</h1>
+        <h1>Good Morning, {{ $lecturerData->Status . " " . $lecturerData->LecturerLastname }}</h1>
         <ul style="grid-template-columns: 1fr 1fr 1fr">
             <li><a href=""><h3>To-do List</h3></a></li>
             <li><a href=""><h3>Timetable</h3></a></li>

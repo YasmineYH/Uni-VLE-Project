@@ -43,14 +43,14 @@
         @foreach ($courseMaterials as $courseMaterial)
             <li class="normal-card menu">
                 <div class="card-a">
-                    <h3>{{ $courseMaterial->Material_ID }}</h3>
+                    <h3>{{ $courseMaterial->MaterialID }}</h3>
                 </div>
                 <div class="floating-menu">
                     <div class="floating-menu-shadow"></div>
                     <ul>
-                        <li><a href="{{ Route('lecturer_download_material', ['courseCode' => $courseCode, 'materialPath' => $courseMaterial->Material_ID]) }}"><h3>Download</h3></a></li>
+                        <li><a href="{{ Route('lecturer_download_material', ['courseCode' => $courseCode, 'materialPath' => $courseMaterial->MaterialID]) }}"><h3>Download</h3></a></li>
                         
-                        <form action="{{ Route('lecturer_delete_material', ['courseCode' => $courseCode, 'materialID' => $courseMaterial->Material_ID]) }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ Route('lecturer_delete_material', ['courseCode' => $courseCode, 'materialID' => $courseMaterial->MaterialID]) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             {{method_field('DELETE')}}
                             <input name="_method" type="hidden" value="DELETE">

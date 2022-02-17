@@ -2,14 +2,14 @@
 @php ($page = 'start_class')
 
 @section('page-content')
-    <h1 class="h1-cener">Pick a Course</h1>
+    <h1 class="h1-cener">Which class would you like to start?</h1>
 
 
     <ul class="lecturer-class-cards">
         @foreach ($lecturerCourses as $lecturerCourse)
             <li class="normal-card">
                 <a class="card-a" onclick="openModal()">
-                    <h3>{{ $lecturerCourse->Course_Code }}</h3>
+                    <h3>{{ $lecturerCourse->CourseCode }}</h3>
                 </a>
             </li>
         @endforeach

@@ -23,9 +23,9 @@
 
     
     <div class="label">
-        <h2>{{ $assignment[0]->Assignment_Type}}</h2>
+        <h2>{{ $assignment[0]->AssignmentType}}</h2>
         <img src="{{ asset('/images/right-arrow2.svg') }}" alt="">
-        <p>{{ $assignment[0]->Submission_Deadline}}</p>
+        <p>{{ $assignment[0]->SubmissionDeadline}}</p>
         <img src="{{ asset('/images/right-arrow2.svg') }}" alt="">
         <p>Submissions</p>
     </div>
@@ -44,12 +44,12 @@
             @foreach ($submissions as $submission)
                 <div class="member table-row">
                     <div class="table-col name"><p>17/52HA103</p></div>
-                    <div class="table-col name"><p>{{ $assignment[0]->Submission_Deadline }}</p></div>
-                    <div class="table-col name"><p>{{ $submission->created_at }}</p></div>
+                    <div class="table-col name"><p>{{ $assignment[0]->SubmissionDeadline }}</p></div>
+                    <div class="table-col name"><p>{{ $submission->createdat }}</p></div>
                     <div class="table-col name table-grades">
                         @if ($submission->Grade)
-                            <p>{{ $submission->Grade . '/' . $assignment[0]->Total_Mark }}</p>
-                            @if ($assignment[0]->Assignment_Type != 'Multiple Choice')
+                            <p>{{ $submission->Grade . '/' . $assignment[0]->TotalMark }}</p>
+                            @if ($assignment[0]->AssignmentType != 'Multiple Choice')
                                 <a href="{{ Route('grade_assignment', ['courseCode' => $courseCode, 'assignID' => $assignment[0]->id, 'submissionID' => $submission->id]) }}" class="normal-btn">Re-grade script</a>
                             @endif
                         @else

@@ -27,8 +27,8 @@
         @foreach ($assignments as $assignment)
             <li class="normal-card menu">
                 <a href="{{ Route('submissions', ['courseCode' => $courseCode, 'assignID' => $assignment->id]) }}" class="card-a">
-                    <h3>{{ $assignment->Assignment_Type }}</h3>
-                    <p>{{ $assignment->Submission_Deadline }}</p>
+                    <h3>{{ $assignment->AssignmentType }}</h3>
+                    <p>{{ $assignment->SubmissionDeadline }}</p>
                 </a>
             </li>
         @endforeach

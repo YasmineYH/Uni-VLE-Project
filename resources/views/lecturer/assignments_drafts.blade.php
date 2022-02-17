@@ -43,8 +43,8 @@
         @foreach ($assignDrafts as $assignDraft)
             <li class="normal-card menu">
                 <div class="card-a">
-                    <h3>{{ $assignDraft->Assignment_Type }}</h3>
-                    <p>{{ $assignDraft->Submission_Deadline }}</p>
+                    <h3>{{ $assignDraft->AssignmentType }}</h3>
+                    <p>{{ $assignDraft->SubmissionDeadline }}</p>
                 </div>
                 <div class="floating-menu">
                     <div class="floating-menu-shadow"></div>

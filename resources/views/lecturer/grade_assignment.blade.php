@@ -5,7 +5,7 @@
 
     function getQuestion($id) {
         $question = Assignment_Question::where('id', '=', $id)->first();
-        return $question->Question_Title;
+        return $question->QuestionTitle;
     }
 
 ?>
@@ -32,16 +32,16 @@
 
     
     <div class="label">
-        <h2>{{ $assignment[0]->Assignment_Type}}</h2>
+        <h2>{{ $assignment[0]->AssignmentType}}</h2>
         <img src="{{ asset('/images/right-arrow2.svg') }}" alt="">
-        <p>{{ $assignment[0]->Submission_Deadline}}</p>
+        <p>{{ $assignment[0]->SubmissionDeadline}}</p>
         <img src="{{ asset('/images/right-arrow2.svg') }}" alt="">
         <p>Grade</p>
         <img src="{{ asset('/images/right-arrow2.svg') }}" alt="">
-        <p>{{ $submissions[0]->Student_ID}}</p>
+        <p>{{ $submissions[0]->StudentID}}</p>
     </div>
 
-    <form action="{{ Route('save_grade_assignment', ['courseCode' => $courseCode, 'assignTotal' => $assignment[0]->Total_Mark, 'submissionID' => $submissions[0]->id]) }}" method="post" enctype="multipart/form-data">
+    <form action="{{ Route('save_grade_assignment', ['courseCode' => $courseCode, 'assignTotal' => $assignment[0]->TotalMark, 'submissionID' => $submissions[0]->id]) }}" method="post" enctype="multipart/form-data">
         @csrf
         {{method_field('PUT')}}
 
@@ -62,7 +62,7 @@
             @if ($assignment[0]->Assignment_Type == 'Theory')
             @foreach ($questions as $key => $question)
                 <div class="question-box">
-                    <label for="">Question {{ $key + 1 }}: <span>{{ getQuestion($question->Question_ID) }}</span></label>
+                    <label for="">Question {{ $key + 1 }}: <span>{{ getQuestion($question->QuestionID) }}</span></label>
                     <div class="frame-input">
                         <p style="font-size: 15px">{{ $question->Answer}}</p>
                     </div>
@@ -74,8 +74,8 @@
             @if ($assignment[0]->Assignment_Type == 'Essay')
             @foreach ($questions as $key => $question)
                 <div class="question-box">
-                    <label for="">Question {{ $key + 1 }}: <span>{{ getQuestion($question->Question_ID) }}</span></label>
-                    <a class="normal-btn" style="display: block; height: 45px; text-align:center; padding-top: 11px; width: 80%; margin: 30px auto" href="{{ route('lecturer_download_essay', ['answerID' => $question->id]) }}">Click here to download {{  $submissions[0]->Student_ID }}'s assignment file' </a>
+                    <label for="">Question {{ $key + 1 }}: <span>{{ getQuestion($question->QuestionID) }}</span></label>
+                    <a class="normal-btn" style="display: block; height: 45px; text-align:center; padding-top: 11px; width: 80%; margin: 30px auto" href="{{ route('lecturer_download_essay', ['answerID' => $question->id]) }}">Click here to download {{  $submissions[0]->StudentID }}'s assignment file' </a>
                     <input class="insert-grade" type="number" name="grade[]" id="" placeholder="Insert grade here" value="{{ old('grade[]') }}">
                 </div>
             @endforeach
@@ -86,7 +86,7 @@
         
         <div class="grade-total">
             <p id="grade-error" style="color: red"></p>
-            <h3>Total grade: <span>0</span>/<span id="total">{{ $assignment[0]->Total_Mark }}</span></h3>
+            <h3>Total grade: <span>0</span>/<span id="total">{{ $assignment[0]->TotalMark }}</span></h3>
             <button type="submit" name="form-submit" value="theory" class="normal-btn">Save</button>
         </div>
     </form>
