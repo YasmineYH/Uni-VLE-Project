@@ -174,7 +174,7 @@ class StudentController extends Controller {
     function check(Request $request) {
         // Validate requests
         $request->validate([
-            'StudentID' => 'required',
+            'Student_ID' => 'required',
             'Password' => 'required'
         ]);
 
