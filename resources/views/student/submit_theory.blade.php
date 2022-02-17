@@ -14,9 +14,9 @@
     <div class="label">
         <h2>{{ $courseCode}}</h2>
         <img src="{{ asset('/images/right-arrow2.svg') }}" alt="">
-        <h2>{{ $assignment[0]->Assignment_Type}}</h2>
+        <h2>{{ $assignment[0]->AssignmentType}}</h2>
         <img src="{{ asset('/images/right-arrow2.svg') }}" alt="">
-        <p>{{ $assignment[0]->Submission_Deadline}}</p>
+        <p>{{ $assignment[0]->SubmissionDeadline}}</p>
         <img src="{{ asset('/images/right-arrow2.svg') }}" alt="">
         <p>Submit</p>
     </div>

@@ -10,10 +10,10 @@ class Lecturer extends Model
     use HasFactory;
 
     protected $fillable = [
-        'Lecturer_ID',
-        'Lecturer_Firstname',
-        'Lecturer_Middlename',
-        'Lecturer_Lastname',
+        'LecturerID',
+        'LecturerFirstname',
+        'LecturerMiddlename',
+        'LecturerLastname',
         'Phone',
         'Email',
         'Status',

@@ -5,15 +5,15 @@
     $page = 'assignments';
 
     function getCode($id) {
-        $course = Course::where('Course_ID', '=', $id)->first();
-        return $course->Course_Code;
+        $course = Course::where('CourseID', '=', $id)->first();
+        return $course->CourseCode;
     }
 
     $submitted = array();
 
     foreach ($assignments as $key => $assignment) {
         foreach ($assignment as $key => $assignment_single) {
-            $submission = Assignment_Submission::where('Assignment_ID', '=', $assignment_single->id)->first();
+            $submission = Assignment_Submission::where('AssignmentID', '=', $assignment_single->id)->first();
 
             if (!empty($submission)) {
                 $submitted[] = $assignment_single;
@@ -35,24 +35,24 @@
     <ul class="library-cards">
         @foreach ($submitted as $assignment_single)
             <li class="normal-card student-assign-card">
-                @if ($assignment_single->Assignment_Type == 'Theory')
-                    <a class="card-a" href="{{ route('theory_view', ['courseCode' => getCode($assignment_single->Course_ID), 'assignID' => $assignment_single->id, 'studentData' => $studentData])}}">
+                @if ($assignment_single->AssignmentType == 'Theory')
+                    <a class="card-a" href="{{ route('theory_view', ['courseCode' => getCode($assignment_single->CourseID), 'assignID' => $assignment_single->id, 'studentData' => $studentData])}}">
                 @endif
 
-                @if ($assignment_single->Assignment_Type == 'Essay')
-                    <a class="card-a" href="{{ route('essay_view', ['courseCode' => getCode($assignment_single->Course_ID), 'assignID' => $assignment_single->id, 'studentData' => $studentData])}}">
+                @if ($assignment_single->AssignmentType == 'Essay')
+                    <a class="card-a" href="{{ route('essay_view', ['courseCode' => getCode($assignment_single->CourseID), 'assignID' => $assignment_single->id, 'studentData' => $studentData])}}">
                 @endif
 
-                @if ($assignment_single->Assignment_Type == 'Multiple Choice')
-                    <a class="card-a" href="{{ route('obj_view', ['courseCode' => getCode($assignment_single->Course_ID), 'assignID' => $assignment_single->id, 'studentData' => $studentData])}}">
+                @if ($assignment_single->AssignmentType == 'Multiple Choice')
+                    <a class="card-a" href="{{ route('obj_view', ['courseCode' => getCode($assignment_single->CourseID), 'assignID' => $assignment_single->id, 'studentData' => $studentData])}}">
                 @endif
 
-                @if ($assignment_single->Assignment_Type == 'Subjective')
-                    <a class="card-a" href="{{ route('subj_view', ['courseCode' => getCode($assignment_single->Course_ID), 'assignID' => $assignment_single->id, 'studentData' => $studentData])}}">
+                @if ($assignment_single->AssignmentType == 'Subjective')
+                    <a class="card-a" href="{{ route('subj_view', ['courseCode' => getCode($assignment_single->CourseID), 'assignID' => $assignment_single->id, 'studentData' => $studentData])}}">
                 @endif
                     <div>
-                        <h3>{{ getCode($assignment_single->Course_ID)}} - {{ $assignment_single->Assignment_Type}}</h3>
-                        <p>Due Date: <span>{{ $assignment_single->Submission_Deadline}}</span></p>
+                        <h3>{{ getCode($assignment_single->CourseID)}} - {{ $assignment_single->AssignmentType}}</h3>
+                        <p>Due Date: <span>{{ $assignment_single->SubmissionDeadline}}</span></p>
                     </div>
     
                     <h3 class="assign-button">Click to View</h3>

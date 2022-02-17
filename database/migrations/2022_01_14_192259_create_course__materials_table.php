@@ -13,11 +13,11 @@ class CreateCourseMaterialsTable extends Migration
      */
     public function up()
     {
-        Schema::create("course__materials", function (Blueprint $table) {
+        Schema::create('course_materials', function (Blueprint $table) {
             $table->id();
-            $table->string("`Material_ID`");
-            $table->string("`Course_ID`");
-            $table->string("`Material_File`");
+            $table->string('MaterialID');
+            $table->string('CourseID');
+            $table->string('MaterialFile');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateCourseMaterialsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists("course__materials");
+        Schema::dropIfExists('coursematerials');
     }
 }

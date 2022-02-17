@@ -10,8 +10,8 @@ class Question_Answers extends Model
     use HasFactory;
 
     protected $fillable = [
-        'Submission_ID',
-        'Question_ID',
+        'SubmissionID',
+        'QuestionID',
         'Answer'
     ];
 }

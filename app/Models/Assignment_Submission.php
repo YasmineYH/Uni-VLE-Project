@@ -10,9 +10,9 @@ class Assignment_Submission extends Model
     use HasFactory;
 
     protected $fillable = [
-        'Assignment_ID',
-        'Student_ID',
+        'AssignmentID',
+        'StudentID',
         'Grade',
-        'Date_Submitted',
+        'DateSubmitted',
     ];
 }

@@ -21,8 +21,8 @@ class AssignmentController extends Controller {
             $lecturerData = Lecturer::where('id', '=', session('LoggedLecturer'))->first();
         }
 
-        $courseID = DB::table('courses')->where('Course_Code', '=', [$courseCode])->pluck('Course_ID');
-        $assignDrafts = DB::select('select * from assignments where Course_ID = ? and Draft = ?', [$courseID->first(), 'yes']);
+        $courseID = DB::table('courses')->where('CourseCode', '=', [$courseCode])->pluck('CourseID');
+        $assignDrafts = DB::select('select * from assignments where CourseID = ? and Draft = ?', [$courseID->first(), 'yes']);
 
         return view('lecturer.assignments_drafts')->with('lecturerData', $lecturerData)->with('assignDrafts', $assignDrafts)->with('courseCode', $courseCode);
     }
@@ -34,8 +34,8 @@ class AssignmentController extends Controller {
             $lecturerData = Lecturer::where('id', '=', session('LoggedLecturer'))->first();
         }
 
-        $courseID = DB::table('courses')->where('Course_Code', '=', [$courseCode])->pluck('Course_ID');
-        $assignments = DB::select('select * from assignments where Course_ID = ? and Draft = ?', [$courseID->first(), 'no']);
+        $courseID = DB::table('courses')->where('CourseCode', '=', [$courseCode])->pluck('CourseID');
+        $assignments = DB::select('select * from assignments where CourseID = ? and Draft = ?', [$courseID->first(), 'no']);
 
         return view('lecturer.assignments')->with('lecturerData', $lecturerData)->with('assignments', $assignments)->with('courseCode', $courseCode);
     }
@@ -98,7 +98,7 @@ class AssignmentController extends Controller {
             $lecturerData = Lecturer::where('id', '=', session('LoggedLecturer'))->first();
         }
 
-        $submissions = DB::select('select * from assignment__submissions where Assignment_ID = ?', [$assignID]);
+        $submissions = DB::select('select * from assignment__submissions where AssignmentID = ?', [$assignID]);
         $assignment = DB::select('select * from assignments where id = ?', [$assignID]);
 
         return view('lecturer.submissions')->with('lecturerData', $lecturerData)->with('courseCode', $courseCode)->with('assignID', $assignID)->with('assignment', $assignment)->with('submissions', $submissions);
@@ -109,9 +109,9 @@ class AssignmentController extends Controller {
             $lecturerData = Lecturer::where('id', '=', session('LoggedLecturer'))->first();
         }
 
-        $submissions = DB::select('select * from assignment__submissions where Assignment_ID = ?', [$assignID]);
+        $submissions = DB::select('select * from assignment__submissions where AssignmentID = ?', [$assignID]);
         $assignment = DB::select('select * from assignments where id = ?', [$assignID]);
-        $questions = DB::select('select * from question__answers where Submission_ID = ?', [$submissions[0]->id]);
+        $questions = DB::select('select * from question__answers where SubmissionID = ?', [$submissions[0]->id]);
 
         return view('lecturer.grade_assignment')->with('lecturerData', $lecturerData)->with('courseCode', $courseCode)->with('assignID', $assignID)->with('assignment', $assignment)->with('submissions', $submissions)->with('questions', $questions);
     }
@@ -128,7 +128,7 @@ class AssignmentController extends Controller {
             $lecturerData = Lecturer::where('id', '=', session('LoggedLecturer'))->first();
         }
 
-        $courseID = DB::table('courses')->where('Course_Code', '=', [$courseCode])->pluck('Course_ID');
+        $courseID = DB::table('courses')->where('CourseCode', '=', [$courseCode])->pluck('CourseID');
 
         // Validate requests
         $request->validate([
@@ -140,12 +140,12 @@ class AssignmentController extends Controller {
         $date = date("Y-m-d");
 
         $assignment = Assignment::create([
-            "Course_ID" => $courseID->first(),
-            "Assignment_Type" => $data["type"],
-            "Date_Added" => $date,
-            "Submission_Deadline" => $data['sd'],
-            "Extended_Deadline" => $data['esd'],
-            "Total_Mark" => $data["mark"],
+            "CourseID" => $courseID->first(),
+            "AssignmentType" => $data["type"],
+            "DateAdded" => $date,
+            "SubmissionDeadline" => $data['sd'],
+            "ExtendedDeadline" => $data['esd'],
+            "TotalMark" => $data["mark"],
             "Draft" => $data["draft"]
         ]);
 
@@ -179,9 +179,9 @@ class AssignmentController extends Controller {
                 $data = $request->all();
 
                 $question = Assignment_Question::create([
-                    "Question_ID" => 'que/000',
-                    "Assignment_ID" => $assignID,
-                    "Question_Title" => $data["question"],
+                    "QuestionID" => 'que/000',
+                    "AssignmentID" => $assignID,
+                    "QuestionTitle" => $data["question"],
                 ]);
 
                 if (empty($question->id)) {
@@ -192,16 +192,16 @@ class AssignmentController extends Controller {
                 break;
     
             case 'done':
-                $courseID = DB::table('courses')->where('Course_Code', '=', [$courseCode])->pluck('Course_ID');
-                $assignDrafts = DB::select('select * from assignments where Course_ID = ? and Draft = ?', [$courseID->first(), 'yes']);
+                $courseID = DB::table('courses')->where('CourseCode', '=', [$courseCode])->pluck('CourseID');
+                $assignDrafts = DB::select('select * from assignments where CourseID = ? and Draft = ?', [$courseID->first(), 'yes']);
 
                 $data = $request->all();
 
                 if (!empty($data['question'])) {
                     $question = Assignment_Question::create([
-                        "Question_ID" => 'que/000',
-                        "Assignment_ID" => $assignID,
-                        "Question_Title" => $data["question"],
+                        "QuestionID" => 'que/000',
+                        "AssignmentID" => $assignID,
+                        "QuestionTitle" => $data["question"],
                     ]);
 
                     if (empty($question->id)) {
@@ -221,16 +221,16 @@ class AssignmentController extends Controller {
             $lecturerData = Lecturer::where('id', '=', session('LoggedLecturer'))->first();
         }
 
-        $courseID = DB::table('courses')->where('Course_Code', '=', [$courseCode])->pluck('Course_ID');
-        $assignDrafts = DB::select('select * from assignments where Course_ID = ? and Draft = ?', [$courseID->first(), 'yes']);
+        $courseID = DB::table('courses')->where('CourseCode', '=', [$courseCode])->pluck('CourseID');
+        $assignDrafts = DB::select('select * from assignments where CourseID = ? and Draft = ?', [$courseID->first(), 'yes']);
 
         $data = $request->all();
 
         if (!empty($data['question'])) {
             $question = Assignment_Question::create([
-                "Question_ID" => 'que/000',
-                "Assignment_ID" => $assignID,
-                "Question_Title" => $data["question"],
+                "QuestionID" => 'que/000',
+                "AssignmentID" => $assignID,
+                "QuestionTitle" => $data["question"],
             ]);
 
             if (empty($question->id)) {
@@ -262,14 +262,14 @@ class AssignmentController extends Controller {
                 $data = $request->all();
 
                 $question = Assignment_Question::create([
-                    "Question_ID" => 'que/000',
-                    "Assignment_ID" => $assignID,
-                    "Question_Title" => $data["question"],
-                    "Option_Correct" => $data["option_c"],
-                    "Option_2" => $data["option_2"],
-                    "Option_3" => $data["option_3"],
-                    "Option_4" => $data["option_4"],
-                    "Option_5" => $data["option_5"]
+                    "QuestionID" => 'que/000',
+                    "AssignmentID" => $assignID,
+                    "QuestionTitle" => $data["question"],
+                    "OptionCorrect" => $data["option_c"],
+                    "Option2" => $data["option_2"],
+                    "Option3" => $data["option_3"],
+                    "Option4" => $data["option_4"],
+                    "Option5" => $data["option_5"]
                 ]);
 
                 if (empty($question->id)) {
@@ -280,21 +280,21 @@ class AssignmentController extends Controller {
                 break;
     
             case 'done':
-                $courseID = DB::table('courses')->where('Course_Code', '=', [$courseCode])->pluck('Course_ID');
-                $assignDrafts = DB::select('select * from assignments where Course_ID = ? and Draft = ?', [$courseID->first(), 'yes']);
+                $courseID = DB::table('courses')->where('CourseCode', '=', [$courseCode])->pluck('CourseID');
+                $assignDrafts = DB::select('select * from assignments where CourseID = ? and Draft = ?', [$courseID->first(), 'yes']);
 
                 $data = $request->all();
 
                 if (!empty($data['question'])) {
                     $question = Assignment_Question::create([
-                        "Question_ID" => 'que/000',
-                        "Assignment_ID" => $assignID,
-                        "Question_Title" => $data["question"],
-                        "Option_Correct" => $data["option_c"],
-                        "Option_2" => $data["option_2"],
-                        "Option_3" => $data["option_3"],
-                        "Option_4" => $data["option_4"],
-                        "Option_5" => $data["option_5"]
+                        "QuestionID" => 'que/000',
+                        "AssignmentID" => $assignID,
+                        "QuestionTitle" => $data["question"],
+                        "OptionCorrect" => $data["option_c"],
+                        "Option2" => $data["option_2"],
+                        "Option3" => $data["option_3"],
+                        "Option4" => $data["option_4"],
+                        "Option5" => $data["option_5"]
                     ]);
 
                     if (empty($question->id)) {

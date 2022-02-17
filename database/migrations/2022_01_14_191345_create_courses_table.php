@@ -14,18 +14,14 @@ class CreateCoursesTable extends Migration
      */
     public function up()
     {
-        Schema::create("courses", function (Blueprint $table) {
+        Schema::create('courses', function (Blueprint $table) {
             $table->id();
-            $table->string("`Course_ID`")->unique();
-            $table->string("`Course_Code`");
-            $table->string("`Course_Title`");
-            $table->string("`Lecturer_ID`");
+            $table->string('CourseID')->unique();
+            $table->string('CourseCode');
+            $table->string('CourseTitle');
+            $table->string('LecturerID');
             $table->timestamps();
         });
-
-        DB::table('courses')->insert([
-            'Course_ID' => 'crs/001', 'Course_Code' => 'CSC 420', 'Course_Title' => 'Software Engineering', 'Lecturer_ID' => '17/4356'
-        ]);
     }
 
     /**
@@ -35,6 +31,6 @@ class CreateCoursesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists("courses");
+        Schema::dropIfExists('courses');
     }
 }

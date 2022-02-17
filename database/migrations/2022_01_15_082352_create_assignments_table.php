@@ -13,17 +13,17 @@ class CreateAssignmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create("assignments", function (Blueprint $table) {
+        Schema::create('assignments', function (Blueprint $table) {
             $table->id();
-            $table->string("`Course_ID`");
-            $table->string("`Assignment_Type`");
-            $table->date("`Date_Added`");
-            $table->date("`Submission_Deadline`")->nullable();
-            $table->date("`Extended_Deadline`")->nullable();
-            $table->integer("`Total_Mark`")->nullable();
-            $table->string("Removed")->nullable();
-            $table->string("Expired")->nullable();
-            $table->string("Draft")->nullable();
+            $table->string('CourseID');
+            $table->string('AssignmentType');
+            $table->date('DateAdded');
+            $table->date('SubmissionDeadline')->nullable();
+            $table->date('ExtendedDeadline')->nullable();
+            $table->integer('TotalMark')->nullable();
+            $table->string('Removed')->nullable();
+            $table->string('Expired')->nullable();
+            $table->string('Draft')->nullable();
             $table->timestamps();
         });
     }
@@ -35,6 +35,6 @@ class CreateAssignmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists("assignments");
+        Schema::dropIfExists('assignments');
     }
 }

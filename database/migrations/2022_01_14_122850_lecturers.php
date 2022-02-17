@@ -13,18 +13,18 @@ class Lecturers extends Migration
      */
     public function up()
     {
-        Schema::create("lecturers", function (Blueprint $table) {
+        Schema::create('lecturers', function (Blueprint $table) {
             $table->id();
-            $table->string("`Lecturer_ID`")->unique();
-            $table->string("`Lecturer_Firstname`");
-            $table->string("`Lecturer_Middlename`");
-            $table->string("`Lecturer_Lastname`");
-            $table->string("Phone");
-            $table->string("Email");
-            $table->string("Status");
-            $table->string("Profile");
-            $table->string("Password");
-            $table->timestamp("`email_verified_at`")->nullable();
+            $table->string('LecturerID')->unique();
+            $table->string('LecturerFirstname');
+            $table->string('LecturerMiddlename');
+            $table->string('LecturerLastname');
+            $table->string('Phone');
+            $table->string('Email');
+            $table->string('Status');
+            $table->string('Profile');
+            $table->string('Password');
+            $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
@@ -37,6 +37,6 @@ class Lecturers extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists("lecturers");
+        Schema::dropIfExists('lecturers');
     }
 }

@@ -3,7 +3,7 @@
 
 @section('page-content')
     <div class="home-intro">
-        <h1>Good Morning, {{ $studentData->Student_Firstname }}</h1>
+        <h1>Good Morning, {{ $studentData->StudentFirstname }}</h1>
         <ul>
             <li><a href=""><h3>Courses</h3></a></li>
             <li><a href=""><h3>Lecturers</h3></a></li>

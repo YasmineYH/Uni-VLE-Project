@@ -10,7 +10,7 @@ class Course_Material extends Model
     use HasFactory;
 
     protected $fillable = [
-        'Course_ID',
-        'Material_File'
+        'CourseID',
+        'MaterialFile'
     ];
 }

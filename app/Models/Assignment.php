@@ -10,12 +10,12 @@ class Assignment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'Course_ID',
-        'Assignment_Type',
-        'Date_Added',
-        'Submission_Deadline',
-        'Extended_Deadline',
-        'Total_Mark',
+        'CourseID',
+        'AssignmentType',
+        'DateAdded',
+        'SubmissionDeadline',
+        'ExtendedDeadline',
+        'TotalMark',
         'Removed',
         'Expired',
         'Draft'

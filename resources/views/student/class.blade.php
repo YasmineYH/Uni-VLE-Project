@@ -4,8 +4,8 @@
     $page = 'class';
 
     function getName($id) {
-        $student = Student::where('Student_ID', '=', $id)->first();
-        return $student->Student_Lastname . ' ' . $student->Student_Firstname;
+        $student = Student::where('StudentID', '=', $id)->first();
+        return $student->StudentLastname . ' ' . $student->StudentFirstname;
     }
 ?>
 
@@ -22,12 +22,12 @@
                         <div class="profile-info">
                             <div class="img" style="background-image: url('{{ asset($student->Profile) }}')"></div>
                             <div>
-                                @if ($student->Student_ID == $studentData->Student_ID)
+                                @if ($student->StudentID == $studentData->StudentID)
                                     <h3>You</h3>
                                 @else
-                                    <h3> {{ $student->Student_Lastname . ' ' . $student->Student_Firstname }} </h3>
+                                    <h3> {{ $student->StudentLastname . ' ' . $student->StudentFirstname }} </h3>
                                 @endif
-                                <p> {{ $student->Student_ID}} </p>
+                                <p> {{ $student->StudentID}} </p>
                             </div>
                         </div>
                     @endforeach
@@ -39,10 +39,10 @@
                     <h3>Now active:</h3>
                     <p>You</p>
                     @for ($i = 0; $i < 3; $i++)
-                        @if ($students[$i]->Student_ID == $studentData->Student_ID)
+                        @if ($students[$i]->StudentID == $studentData->StudentID)
                             <p></p>
                         @else
-                            <p> , {{ $students[$i]->Student_Firstname }} </p>
+                            <p> , {{ $students[$i]->StudentFirstname }} </p>
                         @endif
                     @endfor
                     <p>...</p>
@@ -81,12 +81,12 @@
                         <div class="profile-info">
                             <div class="img" style="background-image: url('{{ asset($student->Profile) }}')"></div>
                             <div>
-                                @if ($student->Student_ID == $studentData->Student_ID)
+                                @if ($student->StudentID == $studentData->StudentID)
                                     <h3>You</h3>
                                 @else
-                                    <h3> {{ $student->Student_Lastname . ' ' . $student->Student_Firstname }} </h3>
+                                    <h3> {{ $student->StudentLastname . ' ' . $student->StudentFirstname }} </h3>
                                 @endif
-                                <p> {{ $student->Student_ID}} </p>
+                                <p> {{ $student->StudentID}} </p>
                             </div>
                         </div>
                     @endforeach
@@ -96,7 +96,7 @@
             <div class="chatroom student-chatroom">
                 <div class="chats">
                     @foreach ($chats as $chat)
-                        @if ($chat->Sender == $studentData->Student_ID)
+                        @if ($chat->Sender == $studentData->StudentID)
                             <div class="chat you">
                                 <p class="sender">You</p>
                                 <p>{{ $chat->Message }}</p>
