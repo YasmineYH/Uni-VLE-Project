@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use DB;
 
 class CreateCoursesTable extends Migration
 {
@@ -21,6 +22,8 @@ class CreateCoursesTable extends Migration
             $table->string("`Lecturer_ID`");
             $table->timestamps();
         });
+
+        DB::table('courses')->insert(["crs/001", "CSC 420", "Software Engineering", "17/4356"]);
     }
 
     /**
