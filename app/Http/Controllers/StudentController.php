@@ -179,7 +179,7 @@ class StudentController extends Controller {
         ]);
 
         //Validate successfullly
-        $student = Student::where('StudentID', '=', $request->StudentID)->first();
+        $student = Student::where('StudentID', '=', $request->Student_ID)->first();
         if ($student) {
             if (Hash::check($request->Password, $student->Password)) {
                 $request->session()->put('LoggedStudent', $student->StudentID);

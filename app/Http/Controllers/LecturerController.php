@@ -100,7 +100,7 @@ class LecturerController extends Controller {
         ]);
 
         //Validate successfullly
-        $lecturer = Lecturer::where('LecturerID', '=', $request->LecturerID)->first();
+        $lecturer = Lecturer::where('LecturerID', '=', $request->Lecturer_ID)->first();
         if ($lecturer) {
             if (Hash::check($request->Password, $lecturer->Password)) {
                 $request->session()->put('LoggedLecturer', $lecturer->id);
