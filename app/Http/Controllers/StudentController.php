@@ -31,8 +31,11 @@ class StudentController extends Controller {
     public function library_cm() {
         $studentData = $this->getStudentInfo();
 
+        //var_dump($studentData->Student_ID);
+
         $enrollments = array();
         $enrollmentsID = DB::select('select * from enrollments where Student_ID = ?', [$studentData->Student_ID]);
+        var_dump($enrollmentsID = DB::TABLE('enrollments')->where('Student_ID', '=', [$studentData->Student_ID]));
 
         foreach ($enrollmentsID as $enrollmentID) {
             $id = $enrollmentID->Course_ID;
