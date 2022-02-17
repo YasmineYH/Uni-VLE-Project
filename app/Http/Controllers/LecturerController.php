@@ -35,7 +35,7 @@ class LecturerController extends Controller {
             $lecturerCourses = DB::select("select * from courses where 'LecturerID' = ?", [$lecturerData->LecturerID]);
         }
 
-        echo $lecturerCourses;
+        echo sizeof($lecturerCourses);
 
         return view('lecturer.courses')->with('lecturerData', $lecturerData)->with('lecturerCourses', $lecturerCourses);
     }
