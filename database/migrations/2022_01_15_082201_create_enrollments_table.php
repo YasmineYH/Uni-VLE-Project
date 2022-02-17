@@ -13,10 +13,10 @@ class CreateEnrollmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('enrollments', function (Blueprint $table) {
+        Schema::create("enrollments", function (Blueprint $table) {
             $table->id();
-            $table->string('`Student_ID`');
-            $table->string('`Course_ID`');
+            $table->string("`Student_ID`");
+            $table->string("`Course_ID`");
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateEnrollmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('enrollments');
+        Schema::dropIfExists("enrollments");
     }
 }

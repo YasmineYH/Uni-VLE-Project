@@ -13,12 +13,12 @@ class CreateAssignmentSubmissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('assignment__submissions', function (Blueprint $table) {
+        Schema::create("assignment__submissions", function (Blueprint $table) {
             $table->id();
-            $table->string('`Assignment_ID`');
-            $table->string('`Student_ID`');
-            $table->string('Grade');
-            $table->string('`Date_Submitted`');
+            $table->string("`Assignment_ID`");
+            $table->string("`Student_ID`");
+            $table->string("Grade");
+            $table->string("`Date_Submitted`");
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateAssignmentSubmissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('assignment__submissions');
+        Schema::dropIfExists("assignment__submissions");
     }
 }
