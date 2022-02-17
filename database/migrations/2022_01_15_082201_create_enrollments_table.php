@@ -15,8 +15,8 @@ class CreateEnrollmentsTable extends Migration
     {
         Schema::create('enrollments', function (Blueprint $table) {
             $table->id();
-            $table->string('Student_ID');
-            $table->string('Course_ID');
+            $table->string('`Student_ID`');
+            $table->string('`Course_ID`');
             $table->timestamps();
         });
     }
