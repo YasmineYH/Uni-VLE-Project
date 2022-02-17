@@ -23,7 +23,9 @@ class CreateCoursesTable extends Migration
             $table->timestamps();
         });
 
-        DB::table('courses')->insert(["crs/001", "CSC 420", "Software Engineering", "17/4356"]);
+        DB::table('courses')->insert([
+            'Course_ID' => 'crs/001', 'Course_Code' => 'CSC 420', 'Course_Title' => 'Software Engineering', 'Lecturer_ID' => '17/4356'
+        ]);
     }
 
     /**
