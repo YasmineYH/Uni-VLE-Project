@@ -15,15 +15,15 @@ class CreateStudentsTable extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->string('StudentID')->unique();
-            $table->string('StudentFirstname');
-            $table->string('StudentMiddlename');
-            $table->string('StudentLastname');
-            $table->string('Level');
-            $table->string('Phone');
-            $table->string('Email');
-            $table->string('Profile');
-            $table->string('Password');
+            $table->string('studentid')->unique();
+            $table->string('studentfirstname');
+            $table->string('studentmiddlename');
+            $table->string('studentlastname');
+            $table->string('level');
+            $table->string('phone');
+            $table->string('email');
+            $table->string('profile');
+            $table->string('password');
             $table->timestamps();
         });
     }

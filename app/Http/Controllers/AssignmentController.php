@@ -22,7 +22,7 @@ class AssignmentController extends Controller {
         }
 
         $courseID = DB::table('courses')->where('CourseCode', '=', [$courseCode])->pluck('CourseID');
-        $assignDrafts = DB::select("select * from assignments where 'Course ID' = ? and Draft = ?", [$courseID->first(), 'yes']);
+        $assignDrafts = DB::select("select * from assignments where 'Course ID' = ? and 'Draft' = ?", [$courseID->first(), 'yes']);
 
         return view('lecturer.assignments_drafts')->with('lecturerData', $lecturerData)->with('assignDrafts', $assignDrafts)->with('courseCode', $courseCode);
     }
