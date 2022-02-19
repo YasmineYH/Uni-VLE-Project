@@ -11,14 +11,14 @@ class Student extends Model
     protected $table = 'students';
 
     protected $fillable = [
-        'StudentID',
-        'StudentFirstname',
-        'StudentMiddlename',
-        'StudentLastname',
-        'Level',
-        'Phone',
-        'Email',
-        'Profile',
-        'Password'
+        'studentid',
+        'studentfirstname',
+        'studentmiddlename',
+        'studentlastname',
+        'level',
+        'phone',
+        'email',
+        'profile',
+        'password'
     ];
 }
