@@ -24,15 +24,15 @@ Route::post('/student/create', function (Request $request) {
 
     if (!Student::where('StudentID', '=', $data['StudentID'])->exists()) {
         $student = Student::create([
-            "StudentID" => $data["StudentID"],
-            "StudentFirstname" => $data["StudentFirstname"],
-            "StudentMiddlename" => $data["StudentMiddlename"],
-            "StudentLastname" => $data["StudentLastname"],
-            "Level" => $data["Level"],
-            "Phone" => $data["Phone"],
-            "Email" => $data["Email"],
-            "Profile" => $data["Profile"],
-            "Password" => Hash::make($data["StudentLastname"])
+            "studentid" => $data["StudentID"],
+            "studentfirstname" => $data["StudentFirstname"],
+            "studentmiddlename" => $data["StudentMiddlename"],
+            "studentlastname" => $data["StudentLastname"],
+            "level" => $data["Level"],
+            "phone" => $data["Phone"],
+            "email" => $data["Email"],
+            "profile" => $data["Profile"],
+            "password" => Hash::make($data["StudentLastname"])
         ]);
 
         if (empty($student->id)) {
