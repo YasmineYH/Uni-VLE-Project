@@ -22,7 +22,7 @@ use App\Models\Enrollment;
 Route::post('/student/create', function (Request $request) {
     $data = $request->all();
 
-    if (!Student::where('StudentID', '=', $data['StudentID'])->exists()) {
+    if (!Student::where('studentid', '=', $data['StudentID'])->exists()) {
         $student = Student::create([
             "studentid" => $data["StudentID"],
             "studentfirstname" => $data["StudentFirstname"],
