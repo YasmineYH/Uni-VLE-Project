@@ -5,7 +5,7 @@
         <div class="modal-box">
             <div class="modal-content modal-content-confirm">
                 <h3 style="margin-top: -10px; margin-bottom: 40px; text-align: center">First step completed! Click OK to move to the next steps.</h3>
-                
+                <button>Styles</button>
             </div>
         </div>
     </div>
