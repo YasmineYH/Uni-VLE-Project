@@ -59,7 +59,7 @@
 
             <input name="_method" type="hidden" value="PUT">
 
-            @if ($assignment[0]->Assignment_Type == 'Theory')
+            @if ($assignment[0]->assignmenttype == 'Theory')
             @foreach ($questions as $key => $question)
                 <div class="question-box">
                     <label for="">Question {{ $key + 1 }}: <span>{{ getQuestion($question->questionid) }}</span></label>
@@ -71,7 +71,7 @@
             @endforeach
             @endif
 
-            @if ($assignment[0]->Assignment_Type == 'Essay')
+            @if ($assignment[0]->assignmenttype == 'Essay')
             @foreach ($questions as $key => $question)
                 <div class="question-box">
                     <label for="">Question {{ $key + 1 }}: <span>{{ getQuestion($question->questionid) }}</span></label>

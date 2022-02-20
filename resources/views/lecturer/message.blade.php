@@ -1,4 +1,11 @@
 @extends('layouts.message')
+<?php
+    $success = session(['success']);
+    $type = session(['type']);
+    $assignID = session(['assignID']);
+    $courseCode = session(['courseCode']);
+    $lecturerData = session(['lecturerData']);
+?>
 
 @section('page-content')
     <div class="modal message" style="display: grid; width: 100%; left: 0; height: calc(var(--vh) * 100)">
