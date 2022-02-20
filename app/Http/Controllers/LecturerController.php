@@ -39,22 +39,22 @@ class LecturerController extends Controller {
     }
 
     public function start_class() {
-        $lecturerData = $this.getLecturerInfo();
-        $lecturerCourses = $this.getCourses($lecturerData);
+        $lecturerData = $this->getLecturerInfo();
+        $lecturerCourses = $this->getCourses($lecturerData);
 
         return view('lecturer.start_class')->with('lecturerData', $lecturerData)->with('lecturerCourses', $lecturerCourses);
     }
 
     public function courses() {
-        $lecturerData = $this.getLecturerInfo();
-        $lecturerCourses = $this.getCourses($lecturerData);
+        $lecturerData = $this->getLecturerInfo();
+        $lecturerCourses = $this->getCourses($lecturerData);
 
         return view('lecturer.courses')->with('lecturerData', $lecturerData)->with('lecturerCourses', $lecturerCourses);
     }
 
     public function courses_students($courseCode) {
-        $lecturerData = $this.getLecturerInfo();
-        $lecturerCourses = $this.getCourses($lecturerData);
+        $lecturerData = $this->getLecturerInfo();
+        $lecturerCourses = $this->getCourses($lecturerData);
 
         $courseID = DB::table('courses')->where('coursecode', '=', [$courseCode])->pluck('courseid');
         $courseEnrollments = DB::select('select * from enrollments where courseid = ?', [$courseID->first()]);
@@ -69,8 +69,8 @@ class LecturerController extends Controller {
     }
 
     public function courses_library_cm($courseCode) {
-        $lecturerData = $this.getLecturerInfo();
-        $lecturerCourses = $this.getCourses($lecturerData);
+        $lecturerData = $this->getLecturerInfo();
+        $lecturerCourses = $this->getCourses($lecturerData);
 
         $courseID = DB::table('courses')->where('coursecode', '=', [$courseCode])->pluck('courseid');
         $courseMaterials = DB::select('select * from course__materials where courseid = ?', [$courseID->first()]);
@@ -79,8 +79,8 @@ class LecturerController extends Controller {
     }
 
     public function courses_library_rc($courseCode) {
-        $lecturerData = $this.getLecturerInfo();
-        $lecturerCourses = $this.getCourses($lecturerData);
+        $lecturerData = $this->getLecturerInfo();
+        $lecturerCourses = $this->getCourses($lecturerData);
 
         $courseID = DB::table('courses')->where('coursecode', '=', [$courseCode])->pluck('courseid');
         $courseMaterials = DB::select('select * from course__materials where courseid = ?', [$courseID->first()]);
@@ -89,7 +89,7 @@ class LecturerController extends Controller {
     }
 
     public function notifications() {
-        $lecturerData = $this.getLecturerInfo();
+        $lecturerData = $this->getLecturerInfo();
 
         return view('lecturer.notifications')->with('lecturerData', $lecturerData);
     }
