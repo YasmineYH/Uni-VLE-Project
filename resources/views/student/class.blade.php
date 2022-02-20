@@ -20,20 +20,22 @@
                 <div class="participants-ctn">
                     @foreach ($students as $student)
                         <div class="profile-info">
-                            <div class="img" style="background-image: url('{{ asset($student->profile) }}')"></div>
-
+                            <div class="img" style="background-image: url('{{ asset($studentData->profile) }}')"></div>
                             <div>
                                 <h3>You</h3>
-                                <p> {{ $student->studentid}} </p>
+                                <p> {{ $studentData->studentid}} </p>
                             </div>
-
-                            @if ($student->studentid != $studentData->studentid)
-                            <div>
-                                <h3> {{ $student->studentlastname . ' ' . $student->studentfirstname }} </h3>
-                                <p> {{ $student->studentid}} </p>
-                            </div>
-                            @endif
                         </div>
+
+                        @if ($student->studentid != $studentData->studentid)
+                            <div class="profile-info">
+                                <div class="img" style="background-image: url('{{ asset($student->profile) }}')"></div>
+                                <div>
+                                    <h3> {{ $student->studentlastname . ' ' . $student->studentfirstname }} </h3>
+                                    <p> {{ $student->studentid}} </p>
+                                </div>
+                            </div>
+                        @endif
                     @endforeach
                 </div>
             </div>
