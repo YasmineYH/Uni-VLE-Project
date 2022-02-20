@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/app.css" />
-    <title>{{ $lecturerData->Status . " " . $lecturerData->LecturerLastname }}</title>
+    <title>{{ $lecturerData->status . " " . $lecturerData->lecturerlastname }}</title>
 </head>
 <body>
     <nav class="main-nav">
@@ -102,10 +102,10 @@
     <main>
         <div class="profile-info">
             <div>
-                <h3>{{ $lecturerData->Status . " " . $lecturerData->LecturerLastname }}</h3>
-                <p>{{ $lecturerData->LecturerID }}</p>
+                <h3>{{ $lecturerData->status . " " . $lecturerData->lecturerlastname }}</h3>
+                <p>{{ $lecturerData->lecturerid }}</p>
             </div>
-            <div class="img" style="background-image: url('{{ asset($lecturerData->Profile) }}')">
+            <div class="img" style="background-image: url('{{ asset($lecturerData->profile) }}')">
                 <a href="{{ Route('lecturer_logout') }}"></a>
             </div>
         </div>

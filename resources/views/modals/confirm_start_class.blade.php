@@ -26,7 +26,7 @@
 
         <div class="modal-content modal-content-confirm">
             <h3>Start CSC 421 class?</h3>
-            <a href="class_holding.html" class="normal-btn">Start Class</a>
+            <a href="" class="normal-btn">Start Class</a>
         </div>
     </div>
 </div>

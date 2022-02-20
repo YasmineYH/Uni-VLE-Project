@@ -16,13 +16,17 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class AssignmentController extends Controller {
-    public function assignments_d($courseCode) {
+    public function getLecturerInfo() {
         if (session()->has('LoggedLecturer')) {
             $lecturerData = Lecturer::where('id', '=', session('LoggedLecturer'))->first();
         }
+    }
 
-        $courseID = DB::table('courses')->where('CourseCode', '=', [$courseCode])->pluck('CourseID');
-        $assignDrafts = DB::select("select * from assignments where 'Course ID' = ? and 'Draft' = ?", [$courseID->first(), 'yes']);
+    public function assignments_d($courseCode) {
+        $lecturerData = $this.getLecturerInfo();
+
+        $courseID = DB::table('courses')->where('coursecode', '=', [$courseCode])->pluck('courseid');
+        $assignDrafts = DB::select("select * from assignments where courseid = ? and draft = ?", [$courseID->first(), 'yes']);
 
         return view('lecturer.assignments_drafts')->with('lecturerData', $lecturerData)->with('assignDrafts', $assignDrafts)->with('courseCode', $courseCode);
     }
@@ -30,12 +34,10 @@ class AssignmentController extends Controller {
 
 
     public function assignments($courseCode) {
-        if (session()->has('LoggedLecturer')) {
-            $lecturerData = Lecturer::where('id', '=', session('LoggedLecturer'))->first();
-        }
+        $lecturerData = $this.getLecturerInfo();
 
-        $courseID = DB::table('courses')->where('CourseCode', '=', [$courseCode])->pluck('CourseID');
-        $assignments = DB::select("select * from assignments where 'Course ID' = ? and Draft = ?", [$courseID->first(), 'no']);
+        $courseID = DB::table('courses')->where('coursecode', '=', [$courseCode])->pluck('courseid');
+        $assignments = DB::select("select * from assignments where courseid = ? and draft = ?", [$courseID->first(), 'no']);
 
         return view('lecturer.assignments')->with('lecturerData', $lecturerData)->with('assignments', $assignments)->with('courseCode', $courseCode);
     }
@@ -43,9 +45,7 @@ class AssignmentController extends Controller {
 
 
     public function assignments_add1($courseCode) {
-        if (session()->has('LoggedLecturer')) {
-            $lecturerData = Lecturer::where('id', '=', session('LoggedLecturer'))->first();
-        }
+        $lecturerData = $this.getLecturerInfo();
 
         return view('lecturer.assignments_add1')->with('lecturerData', $lecturerData)->with('courseCode', $courseCode);
     }
@@ -53,9 +53,7 @@ class AssignmentController extends Controller {
 
 
     public function assignments_add2_theory($courseCode, $assignID) {
-        if (session()->has('LoggedLecturer')) {
-            $lecturerData = Lecturer::where('id', '=', session('LoggedLecturer'))->first();
-        }
+        $lecturerData = $this.getLecturerInfo();
 
         return view('lecturer.assignments_add2_theory')->with('lecturerData', $lecturerData)->with('courseCode', $courseCode)->with('assignID', $assignID);
     }
@@ -63,9 +61,7 @@ class AssignmentController extends Controller {
 
 
     public function assignments_add2_essay($courseCode, $assignID) {
-        if (session()->has('LoggedLecturer')) {
-            $lecturerData = Lecturer::where('id', '=', session('LoggedLecturer'))->first();
-        }
+        $lecturerData = $this.getLecturerInfo();
 
         return view('lecturer.assignments_add2_essay')->with('lecturerData', $lecturerData)->with('courseCode', $courseCode)->with('assignID', $assignID);
     }
@@ -73,9 +69,7 @@ class AssignmentController extends Controller {
 
 
     public function assignments_add2_obj($courseCode, $assignID) {
-        if (session()->has('LoggedLecturer')) {
-            $lecturerData = Lecturer::where('id', '=', session('LoggedLecturer'))->first();
-        }
+        $lecturerData = $this.getLecturerInfo();
 
         return view('lecturer.assignments_add2_obj')->with('lecturerData', $lecturerData)->with('courseCode', $courseCode)->with('assignID', $assignID);
     }
@@ -83,52 +77,38 @@ class AssignmentController extends Controller {
 
 
     public function assignments_add2_subj($courseCode, $assignID) {
-        if (session()->has('LoggedLecturer')) {
-            $lecturerData = Lecturer::where('id', '=', session('LoggedLecturer'))->first();
-        }
+        $lecturerData = $this.getLecturerInfo();
 
         return view('lecturer.assignments_add2_subj')->with('lecturerData', $lecturerData)->with('courseCode', $courseCode)->with('assignID', $assignID);
     }
 
 
 
-
     public function submissions($courseCode, $assignID) {
-        if (session()->has('LoggedLecturer')) {
-            $lecturerData = Lecturer::where('id', '=', session('LoggedLecturer'))->first();
-        }
+        $lecturerData = $this.getLecturerInfo();
 
-        $submissions = DB::select("select * from assignment__submissions where 'Assignment ID' = ?", [$assignID]);
+        $submissions = DB::select("select * from assignment__submissions where assignmentid = ?", [$assignID]);
         $assignment = DB::select('select * from assignments where id = ?', [$assignID]);
 
         return view('lecturer.submissions')->with('lecturerData', $lecturerData)->with('courseCode', $courseCode)->with('assignID', $assignID)->with('assignment', $assignment)->with('submissions', $submissions);
     }
 
     public function grade_assignment($courseCode, $assignID, $submissionID) {
-        if (session()->has('LoggedLecturer')) {
-            $lecturerData = Lecturer::where('id', '=', session('LoggedLecturer'))->first();
-        }
+        $lecturerData = $this.getLecturerInfo();
 
-        $submissions = DB::select("select * from assignment__submissions where 'Assignment ID' = ?", [$assignID]);
+        $submissions = DB::select("select * from assignment__submissions where assignmentid = ?", [$assignID]);
         $assignment = DB::select('select * from assignments where id = ?', [$assignID]);
-        $questions = DB::select("select * from question__answers where 'Submission ID' = ?", [$submissions[0]->id]);
+        $questions = DB::select("select * from question__answers where submissionid = ?", [$submissions[0]->id]);
 
         return view('lecturer.grade_assignment')->with('lecturerData', $lecturerData)->with('courseCode', $courseCode)->with('assignID', $assignID)->with('assignment', $assignment)->with('submissions', $submissions)->with('questions', $questions);
     }
     
 
 
-
-
-
-
-
     function add1(Request $request, $courseCode) {
-        if (session()->has('LoggedLecturer')) {
-            $lecturerData = Lecturer::where('id', '=', session('LoggedLecturer'))->first();
-        }
+        $lecturerData = $this.getLecturerInfo();
 
-        $courseID = DB::table('courses')->where('CourseCode', '=', [$courseCode])->pluck('CourseID');
+        $courseID = DB::table('courses')->where('coursecode', '=', [$courseCode])->pluck('courseid');
 
         // Validate requests
         $request->validate([
@@ -140,13 +120,13 @@ class AssignmentController extends Controller {
         $date = date("Y-m-d");
 
         $assignment = Assignment::create([
-            "CourseID" => $courseID->first(),
-            "AssignmentType" => $data["type"],
-            "DateAdded" => $date,
-            "SubmissionDeadline" => $data['sd'],
-            "ExtendedDeadline" => $data['esd'],
-            "TotalMark" => $data["mark"],
-            "Draft" => $data["draft"]
+            "courseid" => $courseID->first(),
+            "assignmenttype" => $data["type"],
+            "dateadded" => $date,
+            "submissiondeadline" => $data['sd'],
+            "extendeddeadline" => $data['esd'],
+            "totalmark" => $data["mark"],
+            "draft" => $data["draft"]
         ]);
 
         if (empty($assignment->id)) {
@@ -165,9 +145,7 @@ class AssignmentController extends Controller {
     }
 
     function add2_theory(Request $request, $courseCode, $assignID) {
-        if (session()->has('LoggedLecturer')) {
-            $lecturerData = Lecturer::where('id', '=', session('LoggedLecturer'))->first();
-        }
+        $lecturerData = $this.getLecturerInfo();
 
         switch ($request->input('form-submit')) {
             case 'next':
@@ -179,9 +157,9 @@ class AssignmentController extends Controller {
                 $data = $request->all();
 
                 $question = Assignment_Question::create([
-                    "QuestionID" => 'que/000',
-                    "AssignmentID" => $assignID,
-                    "QuestionTitle" => $data["question"],
+                    "questionid" => 'que/000',
+                    "assignmentid" => $assignID,
+                    "questiontitle" => $data["question"],
                 ]);
 
                 if (empty($question->id)) {
@@ -192,16 +170,16 @@ class AssignmentController extends Controller {
                 break;
     
             case 'done':
-                $courseID = DB::table('courses')->where('CourseCode', '=', [$courseCode])->pluck('CourseID');
-                $assignDrafts = DB::select("select * from assignments where 'Course ID' = ? and Draft = ?", [$courseID->first(), 'yes']);
+                $courseID = DB::table('courses')->where('coursecode', '=', [$courseCode])->pluck('courseid');
+                $assignDrafts = DB::select("select * from assignments where courseid = ? and draft = ?", [$courseID->first(), 'yes']);
 
                 $data = $request->all();
 
                 if (!empty($data['question'])) {
                     $question = Assignment_Question::create([
-                        "QuestionID" => 'que/000',
-                        "AssignmentID" => $assignID,
-                        "QuestionTitle" => $data["question"],
+                        "questionid" => 'que/000',
+                        "assignmentid" => $assignID,
+                        "questiontitle" => $data["question"],
                     ]);
 
                     if (empty($question->id)) {
@@ -217,20 +195,18 @@ class AssignmentController extends Controller {
     }
 
     function add2_essay(Request $request, $courseCode, $assignID) {
-        if (session()->has('LoggedLecturer')) {
-            $lecturerData = Lecturer::where('id', '=', session('LoggedLecturer'))->first();
-        }
+        $lecturerData = $this.getLecturerInfo();
 
-        $courseID = DB::table('courses')->where('CourseCode', '=', [$courseCode])->pluck('CourseID');
-        $assignDrafts = DB::select("select * from assignments where 'Course ID' = ? and Draft = ?", [$courseID->first(), 'yes']);
+        $courseID = DB::table('courses')->where('coursecode', '=', [$courseCode])->pluck('courseid');
+        $assignDrafts = DB::select("select * from assignments where courseid = ? and draft = ?", [$courseID->first(), 'yes']);
 
         $data = $request->all();
 
         if (!empty($data['question'])) {
             $question = Assignment_Question::create([
-                "QuestionID" => 'que/000',
-                "AssignmentID" => $assignID,
-                "QuestionTitle" => $data["question"],
+                "questionid" => 'que/000',
+                "assignmentid" => $assignID,
+                "questiontitle" => $data["question"],
             ]);
 
             if (empty($question->id)) {
@@ -244,9 +220,7 @@ class AssignmentController extends Controller {
     }
 
     function add2_obj(Request $request, $courseCode, $assignID) {
-        if (session()->has('LoggedLecturer')) {
-            $lecturerData = Lecturer::where('id', '=', session('LoggedLecturer'))->first();
-        }
+        $lecturerData = $this.getLecturerInfo();
 
         switch ($request->input('form-submit')) {
             case 'next':
@@ -262,14 +236,14 @@ class AssignmentController extends Controller {
                 $data = $request->all();
 
                 $question = Assignment_Question::create([
-                    "QuestionID" => 'que/000',
-                    "AssignmentID" => $assignID,
-                    "QuestionTitle" => $data["question"],
-                    "OptionCorrect" => $data["option_c"],
-                    "Option2" => $data["option_2"],
-                    "Option3" => $data["option_3"],
-                    "Option4" => $data["option_4"],
-                    "Option5" => $data["option_5"]
+                    "questionid" => 'que/000',
+                    "assignmentid" => $assignID,
+                    "questiontitle" => $data["question"],
+                    "optioncorrect" => $data["option_c"],
+                    "option2" => $data["option_2"],
+                    "option3" => $data["option_3"],
+                    "option4" => $data["option_4"],
+                    "option5" => $data["option_5"]
                 ]);
 
                 if (empty($question->id)) {
@@ -280,21 +254,21 @@ class AssignmentController extends Controller {
                 break;
     
             case 'done':
-                $courseID = DB::table('courses')->where('CourseCode', '=', [$courseCode])->pluck('CourseID');
-                $assignDrafts = DB::select("select * from assignments where 'Course ID' = ? and Draft = ?", [$courseID->first(), 'yes']);
+                $courseID = DB::table('courses')->where('coursecode', '=', [$courseCode])->pluck('courseid');
+                $assignDrafts = DB::select("select * from assignments where courseid = ? and draft = ?", [$courseID->first(), 'yes']);
 
                 $data = $request->all();
 
                 if (!empty($data['question'])) {
                     $question = Assignment_Question::create([
-                        "QuestionID" => 'que/000',
-                        "AssignmentID" => $assignID,
-                        "QuestionTitle" => $data["question"],
-                        "OptionCorrect" => $data["option_c"],
-                        "Option2" => $data["option_2"],
-                        "Option3" => $data["option_3"],
-                        "Option4" => $data["option_4"],
-                        "Option5" => $data["option_5"]
+                        "questionid" => 'que/000',
+                        "assignmentid" => $assignid,
+                        "questiontitle" => $data["question"],
+                        "optioncorrect" => $data["option_c"],
+                        "option2" => $data["option_2"],
+                        "option3" => $data["option_3"],
+                        "option4" => $data["option_4"],
+                        "option5" => $data["option_5"]
                     ]);
 
                     if (empty($question->id)) {
@@ -308,6 +282,44 @@ class AssignmentController extends Controller {
                 break;
         }
     }
+
+    function save_grade(Request $request, $courseCode, $assignTotal, $submissionID) {
+        $lecturerData = $this.getLecturerInfo();
+
+        $grades = $request->get('grade');
+        $refined_grades = array();
+        $total_Grade = 0;
+
+        foreach ($grades as $key => $grade) {
+            $refined_grades[] = (int)$grade;
+        }
+
+        for ($i=0; $i < count($refined_grades); $i++) { 
+            $total_Grade = $total_Grade + $refined_grades[$i];
+        }
+
+        if ($total_Grade > (int)$assignTotal) {
+            return back()->with('fail', 'Grade cannot be greater than total mark');
+        } else {
+            switch ($request->input('form-submit')) {
+                case 'theory':
+                    if (in_array(null, $grades)) {
+                        return back()->with('fail', 'Assign all grades, please');
+                    } else {
+                        $submitted = Assignment_Submission::find($submissionID);
+
+                        $submitted->grade = $total_Grade;
+
+                        $submitted->save();
+
+                        return back()->with('success', 'Grade added successfully!');
+                    }
+                    break;
+            }
+        }
+    }
+
+    
 
     function send_assignment($courseCode, $assignID, Request $request) {
         $data = $request->all();
@@ -337,47 +349,9 @@ class AssignmentController extends Controller {
         }
     }
 
-    function save_grade(Request $request, $courseCode, $assignTotal, $submissionID) {
-        if (session()->has('LoggedLecturer')) {
-            $lecturerData = Lecturer::where('id', '=', session('LoggedLecturer'))->first();
-        }
-
-        $grades = $request->get('grade');
-        $refined_grades = array();
-        $total_Grade = 0;
-
-        foreach ($grades as $key => $grade) {
-            $refined_grades[] = (int)$grade;
-        }
-
-        for ($i=0; $i < count($refined_grades); $i++) { 
-            $total_Grade = $total_Grade + $refined_grades[$i];
-        }
-
-        if ($total_Grade > (int)$assignTotal) {
-            return back()->with('fail', 'Grade cannot be greater than total mark');
-        } else {
-            switch ($request->input('form-submit')) {
-                case 'theory':
-                    if (in_array(null, $grades)) {
-                        return back()->with('fail', 'Assign all grades, please');
-                    } else {
-                        $submitted = Assignment_Submission::find($submissionID);
-
-                        $submitted->Grade = $total_Grade;
-
-                        $submitted->save();
-
-                        return back()->with('success', 'Grade added successfully!');
-                    }
-                    break;
-            }
-        }
-    }
-
     function download_essay($answerID) {
         $answer = DB::select('select * from question__answers where id = ?', [$answerID]);
-        $answerFile = substr($answer[0]->Answer, 8);
+        $answerFile = substr($answer[0]->answer, 8);
 
         $infoPath = pathinfo($answerFile);
         $extension = $infoPath['extension'];

@@ -8,7 +8,7 @@
         @foreach ($lecturerCourses as $lecturerCourse)
             <li class="normal-card">
                 <a class="card-a" onclick="openModal()">
-                    <h3>{{ $lecturerCourse->CourseCode }}</h3>
+                    <h3>{{ $lecturerCourse->coursecode }}</h3>
                 </a>
             </li>
         @endforeach

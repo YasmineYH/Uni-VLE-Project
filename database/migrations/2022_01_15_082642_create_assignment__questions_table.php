@@ -15,15 +15,15 @@ class CreateAssignmentQuestionsTable extends Migration
     {
         Schema::create('assignment__questions', function (Blueprint $table) {
             $table->id();
-            $table->string('QuestionID');
-            $table->string('AssignmentID');
-            $table->string('QuestionTitle');
-            $table->string('OptionCorrect')->nullable();
-            $table->string('Option2')->nullable();
-            $table->string('Option3')->nullable();
-            $table->string('Option4')->nullable();
-            $table->string('Option5')->nullable();
-            $table->string('AnswerFile')->nullable();
+            $table->string('questionid');
+            $table->string('assignmentid');
+            $table->string('questiontitle');
+            $table->string('optioncorrect')->nullable();
+            $table->string('option2')->nullable();
+            $table->string('option3')->nullable();
+            $table->string('option4')->nullable();
+            $table->string('option5')->nullable();
+            $table->string('answerfile')->nullable();
             $table->timestamps();
         });
     }

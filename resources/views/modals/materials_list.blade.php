@@ -32,12 +32,12 @@
             @foreach ($courseMaterials as $courseMaterial)
             <!--<li class="normal-card menu">
                 <div class="card-a">
-                    <h3>{{ substr($courseMaterial->MaterialID, 11) }}</h3>
+                    <h3>{{ substr($courseMaterial->materialid, 11) }}</h3>
                 </div>
                 <div class="floating-menu">
                     <div class="floating-menu-shadow"></div>
                     <ul>
-                        <li><a href="{{ Route('download_material', ['materialPath' => $courseMaterial->MaterialID]) }}"><h3>Download</h3></a></li>
+                        <li><a href="{{ Route('download_material', ['materialPath' => $courseMaterial->materialid]) }}"><h3>Download</h3></a></li>
                     </ul>
                 </div>
             </li>!-->

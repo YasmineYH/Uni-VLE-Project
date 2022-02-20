@@ -15,17 +15,15 @@ class Lecturers extends Migration
     {
         Schema::create('lecturers', function (Blueprint $table) {
             $table->id();
-            $table->string('LecturerID')->unique();
-            $table->string('LecturerFirstname');
-            $table->string('LecturerMiddlename');
-            $table->string('LecturerLastname');
-            $table->string('Phone');
-            $table->string('Email');
-            $table->string('Status');
-            $table->string('Profile');
-            $table->string('Password');
-            $table->timestamp('email_verified_at')->nullable();
-            $table->rememberToken();
+            $table->string('lecturerid')->unique();
+            $table->string('lecturerfirstname');
+            $table->string('lecturermiddlename');
+            $table->string('lecturerlastname');
+            $table->string('phone');
+            $table->string('email');
+            $table->string('status');
+            $table->string('profile');
+            $table->string('password');
             $table->timestamps();
         });
     }

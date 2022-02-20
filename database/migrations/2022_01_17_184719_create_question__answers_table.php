@@ -15,9 +15,9 @@ class CreateQuestionAnswersTable extends Migration
     {
         Schema::create('question__answers', function (Blueprint $table) {
             $table->id();
-            $table->string('SubmissionID');
-            $table->string('QuestionID');
-            $table->string('Answer');
+            $table->string('submissionid');
+            $table->string('questionid');
+            $table->string('answer');
             $table->timestamps();
         });
     }

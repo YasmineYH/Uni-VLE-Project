@@ -11,14 +11,14 @@ class Lecturer extends Model
     protected $table = 'lecturers';
 
     protected $fillable = [
-        'LecturerID',
-        'LecturerFirstname',
-        'LecturerMiddlename',
-        'LecturerLastname',
-        'Phone',
-        'Email',
-        'Status',
-        'Profile',
-        'Password'
+        'lecturerid',
+        'lecturerfirstname',
+        'lecturermiddlename',
+        'lecturerlastname',
+        'phone',
+        'email',
+        'status',
+        'profile',
+        'password'
     ];
 }

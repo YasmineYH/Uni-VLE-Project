@@ -11,14 +11,14 @@ class Assignment_Question extends Model
     protected $table = 'assignment__questions';
 
     protected $fillable = [
-        'QuestionID',
-        'AssignmentID',
-        'QuestionTitle',
-        'OptionCorrect',
-        'Option2',
-        'Option3',
-        'Option4',
-        'Option5',
-        'AnswerFile'
+        'questionid',
+        'assignmentid',
+        'questiontitle',
+        'optioncorrect',
+        'option2',
+        'option3',
+        'option4',
+        'option5',
+        'answerfile'
     ];
 }

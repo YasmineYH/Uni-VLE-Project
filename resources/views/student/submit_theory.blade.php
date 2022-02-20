@@ -14,9 +14,9 @@
     <div class="label">
         <h2>{{ $courseCode}}</h2>
         <img src="{{ asset('/images/right-arrow2.svg') }}" alt="">
-        <h2>{{ $assignment[0]->AssignmentType}}</h2>
+        <h2>{{ $assignment[0]->assignmenttype}}</h2>
         <img src="{{ asset('/images/right-arrow2.svg') }}" alt="">
-        <p>{{ $assignment[0]->SubmissionDeadline}}</p>
+        <p>{{ $assignment[0]->submissiondeadline}}</p>
         <img src="{{ asset('/images/right-arrow2.svg') }}" alt="">
         <p>Submit</p>
     </div>
@@ -43,7 +43,7 @@
         @csrf
         @foreach ($questions as $key => $question)
             <div class="question-box">
-                <label for="">Question {{ $key+1 }}: <span> {{ $question->Question_Title }} </span></label>
+                <label for="">Question {{ $key+1 }}: <span> {{ $question->question_title }} </span></label>
                 <textarea name="answer[]" class="frame-input" value="{{ old('answer[]')}}"></textarea>
                 <input type="number" name="id[]" value="{{ $question->id }}" style="display: none">
             </div>

@@ -4,8 +4,8 @@
     $page = 'class';
 
     function getName($id) {
-        $student = Student::where('StudentID', '=', $id)->first();
-        return $student->StudentLastname . ' ' . $student->StudentFirstname;
+        $student = Student::where('studentid', '=', $id)->first();
+        return $student->studentlastname . ' ' . $student->studentfirstname;
     }
 ?>
 
@@ -20,14 +20,14 @@
                 <div class="participants-ctn">
                     @foreach ($students as $student)
                         <div class="profile-info">
-                            <div class="img" style="background-image: url('{{ asset($student->Profile) }}')"></div>
+                            <div class="img" style="background-image: url('{{ asset($student->profile) }}')"></div>
                             <div>
-                                @if ($student->StudentID == $studentData->StudentID)
+                                @if ($student->studentid == $studentData->studentid)
                                     <h3>You</h3>
                                 @else
-                                    <h3> {{ $student->StudentLastname . ' ' . $student->StudentFirstname }} </h3>
+                                    <h3> {{ $student->studentlastname . ' ' . $student->studentfirstname }} </h3>
                                 @endif
-                                <p> {{ $student->StudentID}} </p>
+                                <p> {{ $student->studentid}} </p>
                             </div>
                         </div>
                     @endforeach
@@ -39,10 +39,10 @@
                     <h3>Now active:</h3>
                     <p>You</p>
                     @for ($i = 0; $i < 3; $i++)
-                        @if ($students[$i]->StudentID == $studentData->StudentID)
+                        @if ($students[$i]->studentid == $studentData->studentid)
                             <p></p>
                         @else
-                            <p> , {{ $students[$i]->StudentFirstname }} </p>
+                            <p> , {{ $students[$i]->studentfirstname }} </p>
                         @endif
                     @endfor
                     <p>...</p>
@@ -79,14 +79,14 @@
                 <div class="participants-ctn">
                     @foreach ($students as $student)
                         <div class="profile-info">
-                            <div class="img" style="background-image: url('{{ asset($student->Profile) }}')"></div>
+                            <div class="img" style="background-image: url('{{ asset($student->profile) }}')"></div>
                             <div>
-                                @if ($student->StudentID == $studentData->StudentID)
+                                @if ($student->studentid == $studentData->studentid)
                                     <h3>You</h3>
                                 @else
-                                    <h3> {{ $student->StudentLastname . ' ' . $student->StudentFirstname }} </h3>
+                                    <h3> {{ $student->studentlastname . ' ' . $student->studentfirstname }} </h3>
                                 @endif
-                                <p> {{ $student->StudentID}} </p>
+                                <p> {{ $student->studentid}} </p>
                             </div>
                         </div>
                     @endforeach
@@ -96,17 +96,17 @@
             <div class="chatroom student-chatroom">
                 <div class="chats">
                     @foreach ($chats as $chat)
-                        @if ($chat->Sender == $studentData->StudentID)
+                        @if ($chat->sender == $studentData->studentid)
                             <div class="chat you">
                                 <p class="sender">You</p>
-                                <p>{{ $chat->Message }}</p>
-                                <span>{{ substr($chat->Time, 0, 5) }}</span>
+                                <p>{{ $chat->message }}</p>
+                                <span>{{ substr($chat->time, 0, 5) }}</span>
                             </div>
                         @else
                             <div class="chat">
-                                <p class="sender">{{ getName($chat->Sender) }}</p>
-                                <p>{{ $chat->Message }}</p>
-                                <span>{{ substr($chat->Time, 0, 5) }}</span>
+                                <p class="sender">{{ getName($chat->sender) }}</p>
+                                <p>{{ $chat->message }}</p>
+                                <span>{{ substr($chat->time, 0, 5) }}</span>
                             </div>
                         @endif
                         

@@ -15,10 +15,10 @@ class CreateAssignmentSubmissionsTable extends Migration
     {
         Schema::create('assignment__submissions', function (Blueprint $table) {
             $table->id();
-            $table->string('AssignmentID');
-            $table->string('StudentID');
-            $table->string('Grade');
-            $table->string('DateSubmitted');
+            $table->string('assignmentid');
+            $table->string('studentid');
+            $table->string('grade');
+            $table->string('datesubmitted');
             $table->timestamps();
         });
     }

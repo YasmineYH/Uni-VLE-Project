@@ -19,9 +19,9 @@
     <div class="label">
         <h2>{{ $courseCode}}</h2>
         <img src="{{ asset('/images/right-arrow2.svg') }}" alt="">
-        <h2>{{ $assignment[0]->AssignmentType}}</h2>
+        <h2>{{ $assignment[0]->assignmenttype}}</h2>
         <img src="{{ asset('/images/right-arrow2.svg') }}" alt="">
-        <p>{{ $assignment[0]->SubmissionDeadline}}</p>
+        <p>{{ $assignment[0]->submissiondeadline}}</p>
         <img src="{{ asset('/images/right-arrow2.svg') }}" alt="">
         <p>Submit</p>
     </div>
@@ -44,34 +44,34 @@
         @csrf
         @foreach ($shuffled_questions as $key => $question)
             <div class="question-box">
-                <label for="">Question {{ $key+1 }}: <span>{{ $question->QuestionTitle }}</span></label>
+                <label for="">Question {{ $key+1 }}: <span>{{ $question->questiontitle }}</span></label>
                 <span class="input-error">@error('answer{{ $key+1 }}') {{ $message }} @enderror</span class="input-error">
                 <div class="question-options">
                     <div>
                         <input type="radio" name="answer{{ $key+1 }}" value="0">
                         <span class="radio"></span>
-                        <span>{{ $question->Option2 }}</span>
+                        <span>{{ $question->option2 }}</span>
                     </div>
                     <div>
                         <input type="radio" name="answer{{ $key+1 }}" value="1">
                         <span class="radio"></span>
-                        <span>{{ $question->OptionCorrect }}</span>
+                        <span>{{ $question->optioncorrect }}</span>
                     </div>
                     <div>
                         <input type="radio" name="answer{{ $key+1 }}" value="0">
                         <span class="radio"></span>
-                        <span>{{ $question->Option4 }}</span>
+                        <span>{{ $question->option4 }}</span>
                     </div>
                     <div>
                         <input type="radio" name="answer{{ $key+1 }}" value="0">
                         <span class="radio"></span>
-                        <span>{{ $question->Option3 }}</span>
+                        <span>{{ $question->option3 }}</span>
                     </div>
-                    @if ($question->Option5)
+                    @if ($question->option5)
                         <div>
                             <input type="radio" name="answer{{ $key+1 }}" value="0">
                             <span class="radio"></span>
-                            <span>{{ $question->Option5 }}</span>
+                            <span>{{ $question->option5 }}</span>
                         </div>
                     @endif
                 </div>

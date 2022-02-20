@@ -23,6 +23,7 @@ Route::get('/', function () {
 
 
 
+
 Route::get('/lecturer/login', [LecturerController::class, 'login']) -> name('lecturer_login');
 Route::post('lecturer/check', [LecturerController::class, 'check']) -> name('lecturer_login_check');
 Route::get('lecturer_profile', [LecturerController::class, 'lecturer_profile']) -> name('lecturer');
@@ -67,7 +68,6 @@ Route::put('/lecturer/{courseCode}/assignments/{assignID}/sendtostudents', [Assi
 Route::delete('/lecturer/{courseCode}/assignments/{assignID}/delete', [AssignmentController::class, 'delete_assignment']) -> name('lecturer_delete_assignment');
 
 Route::get('/lecturer/notifications', [LecturerController::class, 'notifications'])-> name('lecturer_notifications');
-
 
 
 

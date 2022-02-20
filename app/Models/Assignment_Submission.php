@@ -11,9 +11,9 @@ class Assignment_Submission extends Model
     protected $table = 'assignment__submissions';
 
     protected $fillable = [
-        'AssignmentID',
-        'StudentID',
-        'Grade',
-        'DateSubmitted',
+        'assignmentid',
+        'studentid',
+        'grade',
+        'datesubmitted',
     ];
 }

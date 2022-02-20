@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/app.css" />
-    <title>{{ $studentData->StudentLastname . " " . $studentData->StudentFirstname }}</title>
+    <title>{{ $studentData->studentlastname . " " . $studentData->studentfirstname }}</title>
 </head>
 <body>
     <nav class="main-nav">
@@ -123,10 +123,10 @@
         @endphp 
         <div class="profile-info">
             <div>
-                <h3>{{ $studentData->StudentLastname . " " . $studentData->StudentFirstname }}</h3>
-                <p>{{ $studentData->StudentID }}</p>
+                <h3>{{ $studentData->studentlastname . " " . $studentData->studentfirstname }}</h3>
+                <p>{{ $studentData->studentid }}</p>
             </div>
-            <div class="img" style="background-image: url('{{ asset($studentData->Profile) }}')">
+            <div class="img" style="background-image: url('{{ asset($studentData->profile) }}')">
                 <a href="{{ Route('student_logout') }}"></a>
             </div>
         </div>

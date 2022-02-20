@@ -14,13 +14,9 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Response;
 
 class StudentController extends Controller {
-    public function login() {
-        return view('student.login');
-    }
-
     public function getStudentInfo() {
         if (session()->has('LoggedStudent')) {
-            $data = Student::where('StudentID', '=', session('LoggedStudent'))->first();
+            $data = Student::where('studentid', '=', session('LoggedStudent'))->first();
         }
 
         return $data;
@@ -28,16 +24,22 @@ class StudentController extends Controller {
 
 
 
+    public function login() {
+        return view('student.login');
+    }
+
+    
+
     public function library_cm() {
         $studentData = $this->getStudentInfo();
 
         $enrollments = array();
-        $enrollmentsID = DB::select("select * from enrollments where 'Student ID' = ?", [$studentData->StudentID]);
+        $enrollmentsID = DB::select('select * from enrollments where studentid = ?', [$studentData->StudentID]);
 
         foreach ($enrollmentsID as $enrollmentID) {
-            $id = $enrollmentID->CourseID;
+            $id = $enrollmentID->courseid;
 
-            $courseEnrolled = DB::table('courses')->where('CourseID', '=', [$id])->pluck('CourseCode');
+            $courseEnrolled = DB::table('courses')->where('courseid', '=', [$id])->pluck('coursecode');
             $enrollments[] = $courseEnrolled;
         }
 
@@ -48,7 +50,6 @@ class StudentController extends Controller {
 
     public function library_rc() {
         $studentData = $this->getStudentInfo();
-
 
         return view('student.library_classes')->with('studentData', $studentData);
     }
@@ -71,11 +72,11 @@ class StudentController extends Controller {
         $studentData = $this->getStudentInfo();
 
 
-        $courses = DB::select("select * from enrollments where 'Student ID' = ?", [$studentData['StudentID']]);
+        $courses = DB::select('select * from enrollments where studentid = ?', [$studentData['studentid']]);
         $assignments = array();
 
         foreach ($courses as $property => $course) {
-            $assignment = DB::select("select * from assignments where 'Course ID' = ? and Draft = ?", [$course->CourseID, 'no']);
+            $assignment = DB::select('select * from assignments where courseid = ? and draft = ?', [$course->courseid, 'no']);
             $assignments[] = $assignment;
         }
 
@@ -87,7 +88,7 @@ class StudentController extends Controller {
 
 
         $assignment = DB::select('select * from assignments where id = ?', [$assignID]);
-        $questions = DB::select("select * from assignment__questions where 'Assignment ID' = ?", [$assignID]);
+        $questions = DB::select('select * from assignment__questions where assignmentid = ?', [$assignID]);
 
         return view('student.submit_theory')->with('studentData', $studentData)->with('assignment', $assignment)->with('courseCode', $courseCode)->with('questions', $questions);
     }
@@ -97,7 +98,7 @@ class StudentController extends Controller {
 
 
         $assignment = DB::select('select * from assignments where id = ?', [$assignID]);
-        $questions = DB::select("select * from assignment__questions where 'Assignment ID' = ?", [$assignID]);
+        $questions = DB::select('select * from assignment__questions where assignmentid = ?', [$assignID]);
 
         return view('student.submit_essay')->with('studentData', $studentData)->with('assignment', $assignment)->with('courseCode', $courseCode)->with('questions', $questions);
     }
@@ -107,7 +108,7 @@ class StudentController extends Controller {
 
 
         $assignment = DB::select('select * from assignments where id = ?', [$assignID]);
-        $questions = DB::select("select * from assignment__questions where 'Assignment ID' = ?", [$assignID]);
+        $questions = DB::select('select * from assignment__questions where assignmentid = ?', [$assignID]);
 
         return view('student.submit_obj')->with('studentData', $studentData)->with('assignment', $assignment)->with('courseCode', $courseCode)->with('questions', $questions);
     }
@@ -116,11 +117,11 @@ class StudentController extends Controller {
         $studentData = $this->getStudentInfo();
 
 
-        $courses = DB::select("select * from enrollments where 'Student ID' = ?", [$studentData['StudentID']]);
+        $courses = DB::select('select * from enrollments where studentid = ?', [$studentData['studentid']]);
         $assignments = array();
 
         foreach ($courses as $property => $course) {
-            $assignment = DB::select("select * from assignments where 'Course ID' = ? and Draft = ?", [$course->CourseID, 'no']);
+            $assignment = DB::select('select * from assignments where courseid = ? and draft = ?', [$course->courseid, 'no']);
             $assignments[] = $assignment;
         }
 
@@ -132,8 +133,8 @@ class StudentController extends Controller {
 
 
         $assignment = DB::select('select * from assignments where id = ?', [$assignID]);
-        $submission = DB::select("select * from assignment__submissions where 'Assignment ID' = ?", [$assignID]);
-        $questions = DB::select("select * from question__answers where 'Submission ID' = ?", [$submission[0]->id]);
+        $submission = DB::select('select * from assignment__submissions where assignmentid = ?', [$assignID]);
+        $questions = DB::select('select * from question__answers where submissionid = ?', [$submission[0]->id]);
 
         return view('student.theory_view')->with('studentData', $studentData)->with('courseCode', $courseCode)->with('submission', $submission)->with('assignment', $assignment)->with('questions', $questions);
     }
@@ -143,8 +144,8 @@ class StudentController extends Controller {
 
 
         $assignment = DB::select('select * from assignments where id = ?', [$assignID]);
-        $submission = DB::select("select * from assignment__submissions where 'Assignment ID' = ?", [$assignID]);
-        $questions = DB::select("select * from question__answers where 'Submission ID' = ?", [$submission[0]->id]);
+        $submission = DB::select('select * from assignment__submissions where assignmentid = ?', [$assignID]);
+        $questions = DB::select('select * from question__answers where submissionid = ?', [$submission[0]->id]);
 
         return view('student.essay_view')->with('studentData', $studentData)->with('courseCode', $courseCode)->with('submission', $submission)->with('assignment', $assignment)->with('questions', $questions);
     }
@@ -154,8 +155,8 @@ class StudentController extends Controller {
 
 
         $assignment = DB::select('select * from assignments where id = ?', [$assignID]);
-        $submission = DB::select("select * from assignment__submissions where 'Assignment ID' = ?", [$assignID]);
-        $questions = DB::select("select * from question__answers where 'Submission ID' = ?", [$submission[0]->id]);
+        $submission = DB::select('select * from assignment__submissions where assignmentid = ?', [$assignID]);
+        $questions = DB::select('select * from question__answers where submissionid = ?', [$submission[0]->id]);
 
         return view('student.obj_view')->with('studentData', $studentData)->with('courseCode', $courseCode)->with('submission', $submission)->with('assignment', $assignment)->with('questions', $questions);
     }
@@ -178,10 +179,10 @@ class StudentController extends Controller {
         ]);
 
         //Validate successfullly
-        $student = Student::where('StudentID', '=', $request->Student_ID)->first();
+        $student = Student::where('studentid', '=', $request->Student_ID)->first();
         if ($student) {
-            if (Hash::check($request->Password, $student->Password)) {
-                $request->session()->put('LoggedStudent', $student->StudentID);
+            if (Hash::check($request->Password, $student->password)) {
+                $request->session()->put('LoggedStudent', $student->studentid);
                 return redirect('student_profile');
             } else {
                 return back()->with('fail', 'Invalid password');
@@ -193,7 +194,7 @@ class StudentController extends Controller {
 
     function student_profile() {
         if (session()->has('LoggedStudent')) {
-            $student = Student::where('StudentID', '=', session('LoggedStudent'))->first();
+            $student = Student::where('studentid', '=', session('LoggedStudent'))->first();
             $data = [
                 'studentData' => $student
             ];
@@ -231,22 +232,22 @@ class StudentController extends Controller {
         $date = date("Y-m-d");
       
         if (!(in_array(null, $answers))) {
-            $submitted = DB::select("select * from assignment__submissions where 'Assignment ID' = ? and 'Student ID' = ?", [$assignID, $studentData->StudentID]);
+            $submitted = DB::select('select * from assignment__submissions where assignmentid = ? and studentid = ?', [$assignID, $studentData->studentid]);
 
             if (empty($submitted)) {
                 $submission = Assignment_Submission::create([
-                    "AssignmentID" => $assignID,
-                    "StudentID" => $studentData->StudentID,
-                    "DateSubmitted" => $date,
-                    "Grade" => ''
+                    "assignmentid" => $assignID,
+                    "studentid" => $studentData->studentid,
+                    "datesubmitted" => $date,
+                    "grade" => ''
                 ]);
     
                 if ($submission->id) {
                     foreach ($answers as $key => $answer) {
                         $assignment = Question_Answers::create([
-                            "SubmissionID" => $submission->id,
-                            "QuestionID" => $ids[$key],
-                            "Answer" => $answer
+                            "submissionid" => $submission->id,
+                            "questionid" => $ids[$key],
+                            "answer" => $answer
                         ]);
     
                         if (empty($assignment->id)) {
@@ -284,21 +285,21 @@ class StudentController extends Controller {
             if ($extension == 'pdf') {
                 $file->storeAs('uploads', $fileName, 'public');
 
-                $submitted = DB::select("select * from assignment__submissions where 'Assignment ID' = ? and 'Student ID' = ?", [$assignID, $studentData->StudentID]);
+                $submitted = DB::select('select * from assignment__submissions where AssignmentID = ? and StudentID = ?', [$assignID, $studentData->studentid]);
 
                 if (empty($submitted)) {
                     $submission = Assignment_Submission::create([
-                        "AssignmentID" => $assignID,
-                        "StudentID" => $studentData->StudentID,
-                        "DateSubmitted" => $date,
-                        "Grade" => ''
+                        "assignmentid" => $assignID,
+                        "studentid" => $studentData->studentid,
+                        "datesubmitted" => $date,
+                        "grade" => ''
                     ]);
         
                     if ($submission->id) {
                         $assignment = Question_Answers::create([
-                            "SubmissionID" => $submission->id,
-                            "QuestionID" => $request->get('id'),
-                            "Answer" => '/storage/' . $filePath
+                            "submissionid" => $submission->id,
+                            "questionid" => $request->get('id'),
+                            "answer" => '/storage/' . $filePath
                         ]);
 
                         if (empty($assignment->id)) {
@@ -327,7 +328,7 @@ class StudentController extends Controller {
         $date = date("Y-m-d");
         $answers = array();
         $grade = 0;
-        $assign_total = DB::table('assignments')->where('id', '=', [$assignID])->pluck('TotalMark');
+        $assign_total = DB::table('assignments')->where('id', '=', [$assignID])->pluck('totalmark');
 
         for ($i=0; $i < $num_of_questions; $i++) { 
             $answer_str = 'answer';
@@ -351,14 +352,14 @@ class StudentController extends Controller {
 
         $refined_grade = ($assign_total->first() * $grade) / count($answers);
       
-        $submitted = DB::select("select * from assignment__submissions where 'Assignment ID' = ? and 'Student ID' = ?", [$assignID, $studentData->StudentID]);
+        $submitted = DB::select('select * from assignment__submissions where assignmentid = ? and studentid = ?', [$assignID, $studentData->studentid]);
 
         if (empty($submitted)) {
             $submission = Assignment_Submission::create([
-                "AssignmentID" => $assignID,
-                "StudentID" => $studentData->StudentID,
-                "DateSubmitted" => $date,
-                "Grade" => $refined_grade
+                "assignmentid" => $assignID,
+                "studentid" => $studentData->studentid,
+                "datesubmitted" => $date,
+                "grade" => $refined_grade
             ]);
 
             if ($submission->id) {
@@ -381,10 +382,10 @@ class StudentController extends Controller {
 
         if (!empty($data['message'])) {
             $chat = Chat::create([
-                "Message" => $data['message'],
-                "Sender" => $studentData->StudentID,
-                "Date" => $date,
-                "Time" => $time
+                "message" => $data['message'],
+                "sender" => $studentData->studentid,
+                "date" => $date,
+                "time" => $time
             ]);
 
             if ($chat->id) {

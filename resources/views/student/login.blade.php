@@ -21,7 +21,7 @@
                 @endif
             </div>
             @csrf
-            <span class="input-error">@error('StudentID') {{ $message }} @enderror</span>
+            <span class="input-error">@error('Student_ID') {{ $message }} @enderror</span>
             <label for="Student_ID"><h3>Matric No:</h3></label>
             <input type="text" name="Student_ID" id="Student_ID" value="{{ old('Student_ID') }}">
 

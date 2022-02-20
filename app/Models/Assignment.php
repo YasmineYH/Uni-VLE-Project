@@ -11,14 +11,14 @@ class Assignment extends Model
     protected $table = 'assignments';
 
     protected $fillable = [
-        'CourseID',
-        'AssignmentType',
-        'DateAdded',
-        'SubmissionDeadline',
-        'ExtendedDeadline',
-        'TotalMark',
-        'Removed',
-        'Expired',
-        'Draft'
+        'courseid',
+        'assignmenttype',
+        'dateadded',
+        'submissiondeadline',
+        'extendeddeadline',
+        'totalmark',
+        'removed',
+        'expired',
+        'draft'
     ];
 }

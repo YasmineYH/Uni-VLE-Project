@@ -15,15 +15,15 @@ class CreateAssignmentsTable extends Migration
     {
         Schema::create('assignments', function (Blueprint $table) {
             $table->id();
-            $table->string('CourseID');
-            $table->string('AssignmentType');
-            $table->date('DateAdded');
-            $table->date('SubmissionDeadline')->nullable();
-            $table->date('ExtendedDeadline')->nullable();
-            $table->integer('TotalMark')->nullable();
-            $table->string('Removed')->nullable();
-            $table->string('Expired')->nullable();
-            $table->string('Draft')->nullable();
+            $table->string('courseid');
+            $table->string('assignmenttype');
+            $table->date('dateadded');
+            $table->date('submissiondeadline')->nullable();
+            $table->date('extendeddeadline')->nullable();
+            $table->integer('totalmark')->nullable();
+            $table->string('removed')->nullable();
+            $table->string('expired')->nullable();
+            $table->string('draft')->nullable();
             $table->timestamps();
         });
     }

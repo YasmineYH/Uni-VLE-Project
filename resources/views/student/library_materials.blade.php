@@ -6,15 +6,15 @@
     use App\Models\Course_Material;
 
     function getCode($id) {
-        $course = Course::where('CourseID', '=', $id)->first();
-        return $course->CourseCode;
+        $course = Course::where('courseid', '=', $id)->first();
+        return $course->coursecode;
     }
 
     function hasMaterial($id) {
         $has = array();
         $courseMaterials = Course_Material::all();
         foreach ($courseMaterials as $courseMaterial) {
-            if ($courseMaterial->CourseID == $id) {
+            if ($courseMaterial->courseid == $id) {
                 $has[] = 'yes';
             }
         }
@@ -40,7 +40,7 @@
         @foreach ($enrollmentsID as $key => $enrollment)
             <li class="normal-card">
                 <div class="card-a" onclick="openModals({{ $key }})">
-                    <h3>{{ getCode($enrollment->CourseID) }}</h3>
+                    <h3>{{ getCode($enrollment->courseid) }}</h3>
                     <img class="library-svg" src="{{ asset('images/right-arrow.svg') }}" alt="Go">
                 </div>
             </li>
@@ -73,10 +73,10 @@
 
                     <div class="modal-content  modal-light-bg">
                         @foreach ($courseMaterials as $courseMaterial)
-                            @if ($courseMaterial->Course_ID == $enrollment->CourseID)
-                                <a class="course-material-btn" href="{{ Route('download_material', ['materialPath' => $courseMaterial->Material_ID]) }}">
+                            @if ($courseMaterial->courseid == $enrollment->courseid)
+                                <a class="course-material-btn" href="{{ Route('download_material', ['materialPath' => $courseMaterial->materialid]) }}">
                                     <div class="course-material">
-                                        <p>{{ $courseMaterial->MaterialID }}</p>
+                                        <p>{{ $courseMaterial->materialid }}</p>
                                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M14 11V14H2V11H0V14C0 15.1 0.9 16 2 16H14C15.1 16 16 15.1 16 14V11H14ZM13 7L11.59 5.59L9 8.17V0H7V8.17L4.41 5.59L3 7L8 12L13 7Z" fill="#002865"/>
                                         </svg>
@@ -85,7 +85,7 @@
                             @endif
                         @endforeach
                         
-                        @if (!(in_array('yes', hasMaterial($enrollment->CourseID))))
+                        @if (!(in_array('yes', hasMaterial($enrollment->courseid))))
                             <div class="course-material">
                                 <p style="text-align: center; margin: auto">Your lecturer has not uploaded a course material</p>
                             </div>

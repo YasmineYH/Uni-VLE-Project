@@ -5,7 +5,7 @@
 
     function getQuestion($id) {
         $question = Assignment_Question::where('id', '=', $id)->first();
-        return $question->QuestionTitle;
+        return $question->questiontitle;
     }
 ?>
 
@@ -22,9 +22,9 @@
     <div class="label">
         <h2>{{ $courseCode}}</h2>
         <img src="{{ asset('/images/right-arrow2.svg') }}" alt="">
-        <h2>{{ $assignment[0]->AssignmentType}}</h2>
+        <h2>{{ $assignment[0]->assignmenttype}}</h2>
         <img src="{{ asset('/images/right-arrow2.svg') }}" alt="">
-        <p>{{ $assignment[0]->SubmissionDeadline}}</p>
+        <p>{{ $assignment[0]->submissiondeadline}}</p>
         <img src="{{ asset('/images/right-arrow2.svg') }}" alt="">
         <p>View</p>
     </div>
@@ -32,9 +32,9 @@
     <div class="frame frame-theory" >
         @foreach ($questions as $key => $question)
             <div class="question-box">
-                <label for="">Question {{ $key + 1 }}: <span>{{ getQuestion($question->QuestionID) }}</span></label>
+                <label for="">Question {{ $key + 1 }}: <span>{{ getQuestion($question->questionid) }}</span></label>
                 <div class="frame-input">
-                    <p style="font-size: 15px">{{ $question->Answer}}</p>
+                    <p style="font-size: 15px">{{ $question->answer}}</p>
                 </div>
             </div>
         @endforeach

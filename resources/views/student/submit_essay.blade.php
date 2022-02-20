@@ -14,9 +14,9 @@
     <div class="label">
         <h2>{{ $courseCode}}</h2>
         <img src="{{ asset('/images/right-arrow2.svg') }}" alt="">
-        <h2>{{ $assignment[0]->AssignmentType}}</h2>
+        <h2>{{ $assignment[0]->assignmenttype}}</h2>
         <img src="{{ asset('/images/right-arrow2.svg') }}" alt="">
-        <p>{{ $assignment[0]->SubmissionDeadline}}</p>
+        <p>{{ $assignment[0]->submissiondeadline}}</p>
         <img src="{{ asset('/images/right-arrow2.svg') }}" alt="">
         <p>Submit</p>
     </div>
@@ -43,7 +43,7 @@
         @csrf
 
         <div class="question-box">
-            <label for="">Question: <span>{{ $questions[0]->QuestionTitle}}</span></label>
+            <label for="">Question: <span>{{ $questions[0]->questiontitle}}</span></label>
             <span class="input-error">@error('answer') {{ $message }} @enderror</span>
             <div>
                 <p>Drag your file here or click to upload</p>

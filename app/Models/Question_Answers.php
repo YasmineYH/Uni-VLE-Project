@@ -11,8 +11,8 @@ class Question_Answers extends Model
     protected $table = 'question__answers';
 
     protected $fillable = [
-        'SubmissionID',
-        'QuestionID',
-        'Answer'
+        'submissionid',
+        'questionid',
+        'answer'
     ];
 }

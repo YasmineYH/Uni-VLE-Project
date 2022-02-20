@@ -15,9 +15,9 @@ class CreateCourseMaterialsTable extends Migration
     {
         Schema::create('course__materials', function (Blueprint $table) {
             $table->id();
-            $table->string('MaterialID');
-            $table->string('CourseID');
-            $table->string('MaterialFile');
+            $table->string('materialid');
+            $table->string('courseid');
+            $table->string('materialfile');
             $table->timestamps();
         });
     }

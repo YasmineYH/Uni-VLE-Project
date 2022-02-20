@@ -11,9 +11,9 @@ class Chat extends Model
     protected $table = 'chats';
 
     protected $fillable = [
-        'Message',
-        'Sender',
-        'Date',
-        'Time',
+        'message',
+        'sender',
+        'date',
+        'time',
     ];
 }

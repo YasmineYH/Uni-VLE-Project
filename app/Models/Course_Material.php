@@ -11,7 +11,7 @@ class Course_Material extends Model
     protected $table = 'course__materials';
 
     protected $fillable = [
-        'CourseID',
-        'MaterialFile'
+        'courseid',
+        'materialfile'
     ];
 }
