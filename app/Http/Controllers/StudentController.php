@@ -268,7 +268,6 @@ class StudentController extends Controller {
     function save_essay(Request $request, $courseCode, $assignID) {
         $studentData = $this->getStudentInfo();
 
-
         //dd($request);
         $date = date("Y-m-d");
 

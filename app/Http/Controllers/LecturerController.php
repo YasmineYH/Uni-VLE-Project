@@ -155,6 +155,7 @@ class LecturerController extends Controller {
         if($request->hasFile('file')) {
             $file = $request->file('file');
             $fileName = $file->getClientOriginalName();
+            $extension = pathinfo($fileName, PATHINFO_EXTENSION);
             $filePath = $file->storeAs('uploads', $fileName, 'public');
 
             $fileExists = DB::select('select * from course__materials where materialid = ?', [$fileName]);
