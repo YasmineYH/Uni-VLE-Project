@@ -134,15 +134,7 @@ class AssignmentController extends Controller {
         if (empty($assignment->id)) {
             return back()->with('fail', 'Something went wrong');
         } else {
-            if ($data["type"] == 'Theory') {
-                return redirect()->route('assignment_message')->with('success', 'step 1')->with('assignID', $assignment->id)->with('type', $data["type"])->with('courseCode', $courseCode)->with('lecturerData', $lecturerData);
-            } else if ($data["type"] == 'Multiple Choice') {
-                return redirect()->route('assignment_message')->with('success', 'step 1')->with('assignID', $assignment->id)->with('type', $data["type"])->with('courseCode', $courseCode)->with('lecturerData', $lecturerData);
-            } else if ($data["type"] == 'Subjective') {
-                return redirect()->route('assignment_message')->with('success', 'step 1')->with('assignID', $assignment->id)->with('type', $data["type"])->with('courseCode', $courseCode)->with('lecturerData', $lecturerData);
-            } else if ($data["type"] == 'Essay') {
-                return redirect()->route('assignment_message')->with('success', 'step 1')->with('assignID', $assignment->id)->with('type', $data["type"])->with('courseCode', $courseCode)->with('lecturerData', $lecturerData);
-            }
+            return redirect()->route('assignment_message')->with('success', 'step 1')->with('assignID', $assignment->id)->with('type', $data["type"])->with('courseCode', $courseCode)->with('lecturerData', $lecturerData);
         }
     }
 
@@ -331,7 +323,7 @@ class AssignmentController extends Controller {
             $success = false;
             return back()->with('fail', 'Assignment could not be sent out');
         } else {
-            $assignment['Draft'] = 'no';
+            $assignment['draft'] = 'no';
             var_dump($assignment);
             $assignment->save();
             return back()->with('success', 'Assignment successfully sent out');
