@@ -21,9 +21,6 @@
 
         return $has;
     }
-
-    //var_dump(in_array('yes', hasMaterial('crs/003')));
-    //var_dump(hasMaterial('crs/002'));
 ?>
 
 @section('page-content')
