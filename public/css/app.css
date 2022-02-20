@@ -1255,7 +1255,7 @@ img.recorded-class-svg {
 }
 
 .modal.message {
-    visibility: visible; 
+    display: flex;
     width: 100%; 
     left: 0; 
     height: calc(var(--vh) * 100);
