@@ -83,18 +83,24 @@
                 </svg>
     
                 <div class="participants-ctn">
+                    <div class="profile-info">
+                        <div class="img" style="background-image: url('{{ asset($studentData->profile) }}')"></div>
+                        <div>
+                            <h3>You</h3>
+                            <p> {{ $studentData->studentid}} </p>
+                        </div>
+                    </div>
+
                     @foreach ($students as $student)
+                        @if ($student->studentid != $studentData->studentid)
                         <div class="profile-info">
                             <div class="img" style="background-image: url('{{ asset($student->profile) }}')"></div>
                             <div>
-                                @if ($student->studentid == $studentData->studentid)
-                                    <h3>You</h3>
-                                @else
-                                    <h3> {{ $student->studentlastname . ' ' . $student->studentfirstname }} </h3>
-                                @endif
+                                <h3> {{ $student->studentlastname . ' ' . $student->studentfirstname }} </h3>
                                 <p> {{ $student->studentid}} </p>
                             </div>
                         </div>
+                        @endif
                     @endforeach
                 </div>
             </div>
