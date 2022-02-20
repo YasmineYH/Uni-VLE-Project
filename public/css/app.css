@@ -1254,6 +1254,19 @@ img.recorded-class-svg {
     cursor: pointer;
 }
 
+.modal.message {
+    visibility: visible; 
+    width: 100%; 
+    left: 0; 
+    height: calc(var(--vh) * 100);
+}
+
+.modal.message h3 {
+    margin-top: -10px; 
+    margin-bottom: 40px; 
+    text-align: center;
+}
+
 @media only screen and (max-width: 800px) {
     .modal {
         width: 100%;
