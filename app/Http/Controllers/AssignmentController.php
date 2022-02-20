@@ -23,7 +23,7 @@ class AssignmentController extends Controller {
     }
 
     public function assignments_d($courseCode) {
-        $lecturerData = $this.getLecturerInfo();
+        $lecturerData = $this->getLecturerInfo();
 
         $courseID = DB::table('courses')->where('coursecode', '=', [$courseCode])->pluck('courseid');
         $assignDrafts = DB::select("select * from assignments where courseid = ? and draft = ?", [$courseID->first(), 'yes']);
@@ -34,7 +34,7 @@ class AssignmentController extends Controller {
 
 
     public function assignments($courseCode) {
-        $lecturerData = $this.getLecturerInfo();
+        $lecturerData = $this->getLecturerInfo();
 
         $courseID = DB::table('courses')->where('coursecode', '=', [$courseCode])->pluck('courseid');
         $assignments = DB::select("select * from assignments where courseid = ? and draft = ?", [$courseID->first(), 'no']);
@@ -45,7 +45,7 @@ class AssignmentController extends Controller {
 
 
     public function assignments_add1($courseCode) {
-        $lecturerData = $this.getLecturerInfo();
+        $lecturerData = $this->getLecturerInfo();
 
         return view('lecturer.assignments_add1')->with('lecturerData', $lecturerData)->with('courseCode', $courseCode);
     }
@@ -53,7 +53,7 @@ class AssignmentController extends Controller {
 
 
     public function assignments_add2_theory($courseCode, $assignID) {
-        $lecturerData = $this.getLecturerInfo();
+        $lecturerData = $this->getLecturerInfo();
 
         return view('lecturer.assignments_add2_theory')->with('lecturerData', $lecturerData)->with('courseCode', $courseCode)->with('assignID', $assignID);
     }
@@ -61,7 +61,7 @@ class AssignmentController extends Controller {
 
 
     public function assignments_add2_essay($courseCode, $assignID) {
-        $lecturerData = $this.getLecturerInfo();
+        $lecturerData = $this->getLecturerInfo();
 
         return view('lecturer.assignments_add2_essay')->with('lecturerData', $lecturerData)->with('courseCode', $courseCode)->with('assignID', $assignID);
     }
@@ -69,7 +69,7 @@ class AssignmentController extends Controller {
 
 
     public function assignments_add2_obj($courseCode, $assignID) {
-        $lecturerData = $this.getLecturerInfo();
+        $lecturerData = $this->getLecturerInfo();
 
         return view('lecturer.assignments_add2_obj')->with('lecturerData', $lecturerData)->with('courseCode', $courseCode)->with('assignID', $assignID);
     }
@@ -77,7 +77,7 @@ class AssignmentController extends Controller {
 
 
     public function assignments_add2_subj($courseCode, $assignID) {
-        $lecturerData = $this.getLecturerInfo();
+        $lecturerData = $this->getLecturerInfo();
 
         return view('lecturer.assignments_add2_subj')->with('lecturerData', $lecturerData)->with('courseCode', $courseCode)->with('assignID', $assignID);
     }
@@ -85,7 +85,7 @@ class AssignmentController extends Controller {
 
 
     public function submissions($courseCode, $assignID) {
-        $lecturerData = $this.getLecturerInfo();
+        $lecturerData = $this->getLecturerInfo();
 
         $submissions = DB::select("select * from assignment__submissions where assignmentid = ?", [$assignID]);
         $assignment = DB::select('select * from assignments where id = ?', [$assignID]);
@@ -94,7 +94,7 @@ class AssignmentController extends Controller {
     }
 
     public function grade_assignment($courseCode, $assignID, $submissionID) {
-        $lecturerData = $this.getLecturerInfo();
+        $lecturerData = $this->getLecturerInfo();
 
         $submissions = DB::select("select * from assignment__submissions where assignmentid = ?", [$assignID]);
         $assignment = DB::select('select * from assignments where id = ?', [$assignID]);
@@ -106,7 +106,7 @@ class AssignmentController extends Controller {
 
 
     function add1(Request $request, $courseCode) {
-        $lecturerData = $this.getLecturerInfo();
+        $lecturerData = $this->getLecturerInfo();
 
         $courseID = DB::table('courses')->where('coursecode', '=', [$courseCode])->pluck('courseid');
 
@@ -145,7 +145,7 @@ class AssignmentController extends Controller {
     }
 
     function add2_theory(Request $request, $courseCode, $assignID) {
-        $lecturerData = $this.getLecturerInfo();
+        $lecturerData = $this->getLecturerInfo();
 
         switch ($request->input('form-submit')) {
             case 'next':
@@ -195,7 +195,7 @@ class AssignmentController extends Controller {
     }
 
     function add2_essay(Request $request, $courseCode, $assignID) {
-        $lecturerData = $this.getLecturerInfo();
+        $lecturerData = $this->getLecturerInfo();
 
         $courseID = DB::table('courses')->where('coursecode', '=', [$courseCode])->pluck('courseid');
         $assignDrafts = DB::select("select * from assignments where courseid = ? and draft = ?", [$courseID->first(), 'yes']);
@@ -220,7 +220,7 @@ class AssignmentController extends Controller {
     }
 
     function add2_obj(Request $request, $courseCode, $assignID) {
-        $lecturerData = $this.getLecturerInfo();
+        $lecturerData = $this->getLecturerInfo();
 
         switch ($request->input('form-submit')) {
             case 'next':
@@ -284,7 +284,7 @@ class AssignmentController extends Controller {
     }
 
     function save_grade(Request $request, $courseCode, $assignTotal, $submissionID) {
-        $lecturerData = $this.getLecturerInfo();
+        $lecturerData = $this->getLecturerInfo();
 
         $grades = $request->get('grade');
         $refined_grades = array();
