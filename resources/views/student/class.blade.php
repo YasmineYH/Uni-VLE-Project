@@ -18,15 +18,15 @@
                 <p id="now-active">Participants</p>
     
                 <div class="participants-ctn">
-                    @foreach ($students as $student)
-                        <div class="profile-info">
-                            <div class="img" style="background-image: url('{{ asset($studentData->profile) }}')"></div>
-                            <div>
-                                <h3>You</h3>
-                                <p> {{ $studentData->studentid}} </p>
-                            </div>
+                    <div class="profile-info">
+                        <div class="img" style="background-image: url('{{ asset($studentData->profile) }}')"></div>
+                        <div>
+                            <h3>You</h3>
+                            <p> {{ $studentData->studentid}} </p>
                         </div>
-
+                    </div>
+                    
+                    @foreach ($students as $student)
                         @if ($student->studentid != $studentData->studentid)
                             <div class="profile-info">
                                 <div class="img" style="background-image: url('{{ asset($student->profile) }}')"></div>
