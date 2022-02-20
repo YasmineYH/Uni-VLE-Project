@@ -43,7 +43,7 @@
         @csrf
         @foreach ($questions as $key => $question)
             <div class="question-box">
-                <label for="">Question {{ $key+1 }}: <span> {{ $question->question_title }} </span></label>
+                <label for="">Question {{ $key+1 }}: <span> {{ $question->questiontitle }} </span></label>
                 <textarea name="answer[]" class="frame-input" value="{{ old('answer[]')}}"></textarea>
                 <input type="number" name="id[]" value="{{ $question->id }}" style="display: none">
             </div>
