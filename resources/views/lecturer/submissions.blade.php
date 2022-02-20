@@ -45,7 +45,7 @@
                 <div class="member table-row">
                     <div class="table-col name"><p>17/52HA103</p></div>
                     <div class="table-col name"><p>{{ $assignment[0]->submissiondeadline }}</p></div>
-                    <div class="table-col name"><p>{{ $submission->createdat }}</p></div>
+                    <div class="table-col name"><p>{{ $submission->created_at }}</p></div>
                     <div class="table-col name table-grades">
                         @if ($submission->grade)
                             <p>{{ $submission->grade . '/' . $assignment[0]->totalmark }}</p>
