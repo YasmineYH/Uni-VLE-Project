@@ -17,7 +17,11 @@ use Illuminate\Support\Facades\Storage;
 
 class AssignmentController extends Controller {
     public function getLecturerInfo() {
-        $lecturerData = Lecturer::where('id', '=', session('LoggedLecturer'))->first();
+        if (session()->has('LoggedLecturer')) {
+            $data = Lecturer::where('id', '=', session('LoggedLecturer'))->first();
+        }
+
+        return $data;
     }
 
     public function assignments_d($courseCode) {

@@ -1,7 +1,3 @@
-<?php
-    var_dump(session()->has('LoggedLecturer'));
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
