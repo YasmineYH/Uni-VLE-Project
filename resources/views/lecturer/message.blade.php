@@ -1,10 +1,10 @@
 @extends('layouts.message')
 <?php
-    $success = session(['success']);
-    $type = session(['type']);
-    $assignID = session(['assignID']);
-    $courseCode = session(['courseCode']);
-    $lecturerData = session(['lecturerData']);
+    $success = session('success');
+    $type = session('type');
+    $assignID = session('assignID');
+    $courseCode = session('courseCode');
+    $lecturerData = session('lecturerData');
 ?>
 
 @section('page-content')
