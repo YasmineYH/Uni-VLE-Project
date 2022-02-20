@@ -16,7 +16,7 @@ function closeModal() {
 }
 
 function closeVideoModal() {
-    document.querySelector('.modal-content video').trigger('pause');
+    document.querySelector('.modal-content video').pause();
     document.querySelector('.modal-content video').currentTime = 0;
     modal.style.display = 'none'
 }
