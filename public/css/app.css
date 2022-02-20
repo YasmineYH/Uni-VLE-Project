@@ -1254,7 +1254,7 @@ img.recorded-class-svg {
     cursor: pointer;
 }
 
-.modal.message {
+/*.modal.message {
     display: flex;
     width: 100%; 
     left: 0; 
@@ -1265,7 +1265,7 @@ img.recorded-class-svg {
     margin-top: -10px; 
     margin-bottom: 40px; 
     text-align: center;
-}
+}*/
 
 @media only screen and (max-width: 800px) {
     .modal {
