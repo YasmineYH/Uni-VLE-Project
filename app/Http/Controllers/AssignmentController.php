@@ -256,7 +256,7 @@ class AssignmentController extends Controller {
                 if (!empty($data['question'])) {
                     $question = Assignment_Question::create([
                         "questionid" => 'que/000',
-                        "assignmentid" => $assignid,
+                        "assignmentid" => $assignID,
                         "questiontitle" => $data["question"],
                         "optioncorrect" => $data["option_c"],
                         "option2" => $data["option_2"],
