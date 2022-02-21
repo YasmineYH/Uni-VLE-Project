@@ -25,7 +25,7 @@
                             <p> {{ $studentData->studentid}} </p>
                         </div>
                     </div>
-                    
+                        
                     @foreach ($students as $student)
                         @if ($student->studentid != $studentData->studentid)
                             <div class="profile-info">
